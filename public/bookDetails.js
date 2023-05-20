@@ -1,3 +1,13 @@
+// Check if the session is set (user is already logged in)
+window.addEventListener("DOMContentLoaded", function () {
+  const userId = sessionStorage.getItem("userId");
+  if (!userId) {
+    // Session is set, user is logged in
+    // Redirect to the addBook.html page
+    window.location.href = "/login.html";
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const bookDetailsContainer = document.getElementById("bookDetails");
 

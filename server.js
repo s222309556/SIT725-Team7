@@ -16,6 +16,12 @@ const bookController = require("./controllers/bookController");
 const userController = require("./controllers/UserController");
 
 // Define routes for books
+app.get("/books", bookController.getBooks);
+app.get("/books/:id", bookController.getBookById);
+app.get("/books/search/:query", bookController.searchBooks);
+app.get("/books/user/:id", bookController.getBooksByUserId);
+app.post("/books", bookController.createBook);
+app.delete("/books/:id", bookController.deleteBook);
 
 // Define routes for users
 app.get("/users", userController.getUsers);

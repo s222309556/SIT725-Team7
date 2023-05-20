@@ -14,18 +14,20 @@ document
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
-    if (data.success) {
+    const res = await response.json();
+    if (res.success) {
+      console.log("data - ", JSON.parse(JSON.stringify(res.data)));
       alert("Login successful!");
       // Store the userId in session storage
-      sessionStorage.setItem("userId", data.data.userId);
+
+      sessionStorage.setItem("userId", res.data._id);
 
       // Redirect to the addBook.html page
       window.location.href = "/home.html";
       // Redirect to the desired page after successful login
       // For example: window.location.href = "/dashboard.html";
     } else {
-      alert(data.message);
+      alert(res.message);
     }
   });
 
