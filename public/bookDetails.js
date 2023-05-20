@@ -1,33 +1,43 @@
-// Function to retrieve the user ID from the query parameter
-const getUserIdFromQueryParams = () => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  //return 1;
-  return urlParams.get("id");
-};
+document.addEventListener("DOMContentLoaded", function () {
+  const bookDetailsContainer = document.getElementById("bookDetails");
 
-// Function to fetch users from the API and update the list
-const getBookDetailsById = async () => {
-  try {
-    const bookId = getUserIdFromQueryParams();
+  // Function to fetch the book details by ID
+  const fetchBookDetails = async () => {
+    try {
+      // Get the book ID from the URL query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookId = urlParams.get("id");
 
-    fetch(`/books/${bookId}`)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res.name); // Handle the book data as needed
-        //Populate result in html
-        document.getElementById("bookName").textContent = res.name;
-        document.getElementById("bookDesc").textContent = res.description;
-        document.getElementById("bookIsbn").textContent = res.isbn;
-        document.getElementById("bookAuthor").textContent = res.author;
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+      if (!bookId) {
+        console.error("Book ID is missing in the URL.");
+        return;
+      }
 
-// Call the fetchUsers function when the page loads
-window.addEventListener("load", getBookDetailsById);
+      const response = await fetch(`/books/${bookId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const book = data.data;
+
+        // Generate the book details HTML
+        const bookDetailsHTML = `
+            <h2>${book.bookName}</h2>
+            <p>Author: ${book.authorName}</p>
+            <p>Description: ${book.bookDescription}</p>
+            <p>ISBN: ${book.bookIsbn}</p>
+            <p>Genre: ${book.bookGenre}</p>
+          `;
+
+        // Display the book details
+        bookDetailsContainer.innerHTML = bookDetailsHTML;
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Fetch and display the book details
+  fetchBookDetails();
+});
