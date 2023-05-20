@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Generate the book details HTML
         const bookDetailsHTML = `
-            <h2>${book.bookName}</h2>
+            <h2>${book.bookTitle}</h2>
             <p>Author: ${book.authorName}</p>
             <p>Description: ${book.bookDescription}</p>
             <p>ISBN: ${book.bookIsbn}</p>

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Generate the book list HTML
         const bookListHTML = books
           .map((book) => {
-            return `<li><a href="/bookDetails.html?id=${book._id}">${book.bookName}</a></li>`;
+            return `<li><a href="/bookDetails.html?id=${book._id}">${book.bookTitle}</a></li>`;
           })
           .join("");
 

@@ -101,7 +101,7 @@ exports.loginUser = async (req, res, next) => {
 // @access  Public
 exports.registerUser = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const email = req.body.email;
 
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
@@ -112,7 +112,7 @@ exports.registerUser = async (req, res, next) => {
     }
     // let id = randomBytes(4).toString("hex");
     // Create a new user
-    const user = await User.create({ name, email, password });
+    const user = await User.create(req.body);
     res.status(201).json({ success: true, data: user });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });

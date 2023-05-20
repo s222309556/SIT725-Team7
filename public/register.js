@@ -6,13 +6,25 @@ document
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const gender = document.getElementById("gender").value;
+    const country = document.getElementById("country").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
 
     const response = await fetch("/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        gender,
+        country,
+        address,
+        phone,
+      }),
     });
 
     const data = await response.json();
@@ -21,9 +33,7 @@ document
       // Store the userId in session storage
       sessionStorage.setItem("userId", data.data.userId);
       // Redirect to the addBook.html page
-      window.location.href = "temp/addBook.html";
-      // Redirect to the login page or any other desired page
-      window.location.href = "temp/login.html";
+      window.location.href = "/home.html";
     } else {
       alert(data.message);
     }

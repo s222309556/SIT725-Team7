@@ -14,17 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
   addBookForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const bookName = document.getElementById("bookName").value;
-    const authorName = document.getElementById("authorName").value;
-    const bookDescription = document.getElementById("bookDescription").value;
-    const bookIsbn = document.getElementById("bookIsbn").value;
-    const bookGenre = document.getElementById("bookGenre").value;
-    console.log(
-      'sessionStorage.getItem("userId")',
-      sessionStorage.getItem("userId")
-    );
+    const bookTitle = document.getElementById("title").value;
+    const authorName = document.getElementById("author").value;
+    const bookDescription = document.getElementById("info").value;
+    const bookIsbn = document.getElementById("isbn").value;
+    const bookGenre = document.getElementById("genre").value;
+
     const bookData = {
-      bookName: bookName,
+      bookTitle: bookTitle,
       authorName: authorName,
       bookDescription: bookDescription,
       bookIsbn: bookIsbn,

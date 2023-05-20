@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 const BookSchema = mongoose.Schema({
-  bookName: {
+  bookTitle: {
     type: String,
     required: true,
   },
@@ -37,7 +37,7 @@ BookSchema.index({ fullText: "text" }); // Create an index on the fullText field
 
 // Middleware to populate the fullText field before saving
 BookSchema.pre("save", function (next) {
-  this.fullText = `${this.bookName} ${this.authorName} ${this.bookIsbn} ${this.bookGenre}`;
+  this.fullText = `${this.bookTitle} ${this.authorName} ${this.bookIsbn} ${this.bookGenre}`;
   next();
 });
 

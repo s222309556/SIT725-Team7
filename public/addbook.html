@@ -90,8 +90,10 @@
 </head>
 
 <body>
+    <script src="addBook.js"></script>
   <h1>Add Book</h1>
   <div class="form-container">
+    <form id="addBookForm" metho="POST">
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" required>
@@ -130,6 +132,7 @@
     </div>
 
     <button type="submit" class="submit-button">Add Book</button>
+</form>
   </div>
 
   <script>
