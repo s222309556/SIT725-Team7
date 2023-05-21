@@ -35,7 +35,6 @@ exports.getOrderById = async (req, res, next) => {
 // @access  Public
 exports.getOrdersByBuyerId = async (req, res, next) => {
   try {
-    console.log(req.params.id);
     const orders = await Order.find({ buyerId: req.params.id });
     if (!orders) {
       return res
