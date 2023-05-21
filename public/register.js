@@ -27,15 +27,16 @@ document
       }),
     });
 
-    const data = await response.json();
-    if (data.success) {
+    const res = await response.json();
+    if (res.success) {
       alert("Registration successful!");
       // Store the userId in session storage
-      sessionStorage.setItem("userId", data.data.userId);
+      sessionStorage.setItem("userId", res.data._id);
+
       // Redirect to the addBook.html page
       window.location.href = "/home.html";
     } else {
-      alert(data.message);
+      alert(res.message);
     }
   });
 
