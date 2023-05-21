@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 const port = 3000;
 const db = require("./db");
 
@@ -16,6 +18,37 @@ const bookController = require("./controllers/bookController");
 const userController = require("./controllers/UserController");
 const messageController = require("./controllers/messageController");
 const orderController = require("./controllers/orderController");
+
+// ... previous server code ...
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // Listen for chat messages from the client
+  socket.on("chatMessage", async (messageObj) => {
+    try {
+      // Save the message to the database using the message controller
+      const createdMessage = await messageController.createMessage({
+        body: {
+          senderId: messageObj.senderId,
+          receiverId: messageObj.receiverId,
+          message: messageObj.message,
+        },
+      });
+
+      // Emit the message to all connected clients
+      io.emit("message", createdMessage.body);
+    } catch (error) {
+      console.error("Error saving message:", error);
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+});
+
+// ... remaining server code ...
 
 // Define routes for books
 app.get("/books", bookController.getBooks);
@@ -42,6 +75,7 @@ app.get("/orders/buyerId/:id", orderController.getOrdersByBuyerId);
 app.get("/orders/sellerId/:id", orderController.getOrdersBySellerId);
 
 // Define routes for messages
+app.post("/messages", messageController.createMessage);
 app.get("/messages/sender/:id", messageController.getMessageBySenderId);
 app.get("/messages/receiver/:id", messageController.getMessageByReceiverId);
 
