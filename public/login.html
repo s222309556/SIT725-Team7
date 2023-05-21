@@ -1,7 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
+  <head>
+    <!-- set the encoding of your site -->
+    <meta charset="utf-8">
+    <!-- set the Compatible of your site -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- set the page title -->
+    <title>Book Swap</title>
+    <!-- include the site Google Fonts stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <!-- include the site bootstrap stylesheet -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- include the site fontawesome stylesheet -->
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- include theme plugins setting stylesheet -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <!-- include theme color setting stylesheet -->
+    <link rel="stylesheet" href="css/color.css">
+    <!-- include theme responsive setting stylesheet -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- include sytlesheet -->
+    <link rel="stylesheet" href="css/bookdetails.css">
+    
+  </head>
+
+  
   <style type = text/css> 
     body {
     font-family: Arial, sans-serif;
@@ -68,6 +100,21 @@
     </style>
 </head>
 <body>
+<!-- pageWrapper -->
+<div id="pageWrapper">
+  <!-- header -->
+  <header id="header" class="position-relative">
+    <!-- headerHolderCol -->
+
+  <!-- mainLogo -->
+  <div class="col-6 col-sm-8">
+    <!-- mainLogo -->
+    <div class="logo">
+      <a href="home.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
+    </div>
+  </div>
+
+  <main mb-3>
   <h1>Login</h1>
   <div class="container">
   <form id="loginForm">
@@ -80,7 +127,22 @@
     <button type="submit" value="Login"> Login </button>
   </form>
   <p>Don't have an Account ? <a href="register.html">Sign up</a></p>
-  </div>  
+  </div> 
+
+  </main>
+  
+  <!-- footer -->
+<footer id="footer" class="overflow-hidden bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
+        <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+  
   <script src="login.js"></script>
 </body>
 </html>

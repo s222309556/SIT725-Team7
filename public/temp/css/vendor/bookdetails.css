@@ -1,0 +1,18 @@
+.heart{
+    color: #000;
+    position: absolute;
+    margin-left: auto;
+    margin-top: auto;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.heart-checkbox{
+    display: none;
+}
+
+
+.heart-checkbox:checked + .heart {
+    color: red;
+}
+
