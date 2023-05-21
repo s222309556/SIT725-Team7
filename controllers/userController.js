@@ -87,10 +87,12 @@ exports.loginUser = async (req, res, next) => {
     const user = await User.findOne({ email: email, password: password });
 
     if (!user) {
-      res.status(400).json({ success: false, message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
-    res.status(200).json({ success: true, data: user });
+    return res.status(200).json({ success: true, data: user });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
