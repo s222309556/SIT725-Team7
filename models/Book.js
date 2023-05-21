@@ -31,6 +31,10 @@ const BookSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  userName: {
+    type: String,
+    required: true,
+  },
 });
 
 BookSchema.index({ fullText: "text" }); // Create an index on the fullText field for text search

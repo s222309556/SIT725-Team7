@@ -73,6 +73,7 @@ app.get("/orders", orderController.getOrders);
 app.get("/orders/:id", orderController.getOrderById);
 app.get("/orders/buyerId/:id", orderController.getOrdersByBuyerId);
 app.get("/orders/sellerId/:id", orderController.getOrdersBySellerId);
+app.post("/orders/checkOrderExist", orderController.checkOrderExist);
 
 // Define routes for messages
 app.post("/messages", messageController.createMessage);

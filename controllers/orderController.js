@@ -94,3 +94,23 @@ exports.updateOrder = async (req, res, next) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// @desc    check if Order is existed with buyerId and bookId
+// @route   POST /orders/checkOrderExist
+// @access  Public
+exports.checkOrderExist = async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      buyerId: req.body.buyerId,
+      bookId: req.body.bookId,
+    });
+    if (!order) {
+      return res
+        .status(200)
+        .json({ success: false, message: "Order not found" });
+    }
+    res.status(200).json({ success: true, data: order });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

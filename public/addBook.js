@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookIsbn: bookIsbn,
       bookGenre: bookGenre,
       userId: sessionStorage.getItem("userId"),
+      userName: sessionStorage.getItem("userName"),
     };
 
     // Perform an AJAX request to send the book data to the server

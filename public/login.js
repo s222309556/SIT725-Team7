@@ -21,6 +21,7 @@ document
       // Store the userId in session storage
 
       sessionStorage.setItem("userId", res.data._id);
+      sessionStorage.setItem("userName", res.data.name.split(" ")[0]); //get first name
 
       // Redirect to the addBook.html page
       window.location.href = "/home.html";
