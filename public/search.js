@@ -1,8 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Fetch and display the list of books
+  checkSession();
   fetchBooks();
   handleSearch();
 });
+
+//check session is set
+function checkSession() {
+  userId = sessionStorage.getItem("userId");
+  if (!userId) {
+    // Session is set, user is logged in
+    // Redirect to the addBook.html page
+    window.location.href = "/login.html";
+    return false;
+  }
+}
 
 // Function to fetch the list of books
 async function fetchBooks() {

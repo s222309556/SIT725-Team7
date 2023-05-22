@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function () {
   if (!userId) {
     // Session is set, user is logged in
     // Redirect to the addBook.html page
-    // window.location.href = "/login.html";
+    window.location.href = "/login.html";
   }
 });
 

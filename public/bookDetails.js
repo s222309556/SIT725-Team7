@@ -15,7 +15,7 @@ function checkSession() {
   if (!userId) {
     // Session is set, user is logged in
     // Redirect to the addBook.html page
-    // window.location.href = "/login.html";
+    window.location.href = "/login.html";
   }
 }
 
@@ -159,7 +159,7 @@ function handleButtonClick() {
     .getElementById("createOrderBtn")
     .addEventListener("click", async function () {
       try {
-        const response = fetch("/orders", {
+        fetch("/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -170,31 +170,26 @@ function handleButtonClick() {
             buyerId: sessionStorage.getItem("userId"),
             sellerId: bookOwnerId,
             status: "Pending",
-            // Add any other required order properties
           }),
-        });
-
-        const data = await response.json();
-        if (data.success) {
-          alert("Order created successfully!");
-          //refresh the page
-          window.location.reload();
-          // Redirect or perform any other action after order creation
-          // For example: window.location.href = "/home.html";
-        } else {
-          alert(data.message);
-        }
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.success) {
+              alert("Order created successfully!");
+              //refresh the page
+              window.location.reload();
+              // Redirect or perform any other action after order creation
+              // For example: window.location.href = "/home.html";
+            } else {
+              alert(res.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } catch (error) {
         console.error("Error:", error);
         alert("An error occurred while creating the order.");
       }
     });
-
-  // wishlist
-  function changeHeartColor() {
-    var heartIcon = document.getElementById("heartIcon");
-    heartIcon.classList.toggle("far");
-    heartIcon.classList.toggle("fas");
-    heartIcon.classList.toggle("red");
-  }
 }

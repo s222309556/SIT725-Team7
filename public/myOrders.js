@@ -1,7 +1,22 @@
 // script.js
 var userId;
-document.addEventListener("DOMContentLoaded", async function () {
+//check session is set
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (!checkSession()) return;
+  fetchOrders();
+});
+
+function checkSession() {
   userId = sessionStorage.getItem("userId");
+  if (!userId) {
+    // Session is set, user is logged in
+    window.location.href = "/login.html";
+    return false;
+  }
+}
+
+async function fetchOrders() {
   try {
     //Get sent orderList
     const response = await fetch(`/orders/buyerId/${userId}`);
@@ -26,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error:", error.message);
     alert("An error occurred while retrieving the orders.");
   }
-});
+}
 
 function populateOrders(orders, element) {
   // Get the container element where the received orders will be appended
