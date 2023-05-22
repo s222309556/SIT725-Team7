@@ -1,11 +1,20 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 const port = 3000;
 const db = require("./db");
 
 db();
 app.use(express.static(__dirname + "/public"));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self' font-src 'self' data:;"
+  );
+  next();
+});
 
 // Use body-parser middleware
 app.use(bodyParser.json());
@@ -17,13 +26,45 @@ const userController = require("./controllers/UserController");
 const messageController = require("./controllers/messageController");
 const orderController = require("./controllers/orderController");
 
+// ... previous server code ...
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // Listen for chat messages from the client
+  socket.on("chatMessage", async (messageObj) => {
+    try {
+      // Save the message to the database using the message controller
+      const createdMessage = await messageController.createMessage({
+        body: {
+          senderId: messageObj.senderId,
+          receiverId: messageObj.receiverId,
+          message: messageObj.message,
+        },
+      });
+
+      // Emit the message to all connected clients
+      io.emit("message", createdMessage.body);
+    } catch (error) {
+      console.error("Error saving message:", error);
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+});
+
+// ... remaining server code ...
+
 // Define routes for books
 app.get("/books", bookController.getBooks);
 app.get("/books/:id", bookController.getBookById);
-app.get("/books/search/:query", bookController.searchBooks);
 app.get("/books/user/:id", bookController.getBooksByUserId);
 app.post("/books", bookController.createBook);
 app.delete("/books/:id", bookController.deleteBook);
+app.post("/books/search", bookController.searchBooks);
+app.put("/books/:id/review", bookController.addReview);
 
 // Define routes for users
 app.get("/users", userController.getUsers);
@@ -40,8 +81,10 @@ app.get("/orders", orderController.getOrders);
 app.get("/orders/:id", orderController.getOrderById);
 app.get("/orders/buyerId/:id", orderController.getOrdersByBuyerId);
 app.get("/orders/sellerId/:id", orderController.getOrdersBySellerId);
+app.post("/orders/checkOrderExist", orderController.checkOrderExist);
 
 // Define routes for messages
+app.post("/messages", messageController.createMessage);
 app.get("/messages/sender/:id", messageController.getMessageBySenderId);
 app.get("/messages/receiver/:id", messageController.getMessageByReceiverId);
 

@@ -5,6 +5,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  userName: {
+    type: String,
+    required: false,
+  },
   email: {
     type: String,
     required: true,
@@ -24,7 +28,24 @@ const UserSchema = mongoose.Schema({
   },
   phone: {
     type: String,
+    required: true,
   },
+  profileLevel: {
+    type: String,
+    enum: ["Gold", "Silver", "Bronze", "None"],
+    default: "None",
+  },
+  redeemPoints: {
+    type: Number,
+    default: 0,
+  },
+});
+
+// Middleware to populate the userName field before saving
+UserSchema.pre("save", function (next) {
+  let emailId = this.email.split("@")[0];
+  this.userName = `${emailId}`;
+  next();
 });
 
 const User = mongoose.model("User", UserSchema);

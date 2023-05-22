@@ -23,7 +23,8 @@ const OrderSchema = mongoose.Schema({
   },
   deliveryMethod: {
     type: String,
-    enum: ["Pickup", "Delivery"],
+    enum: ["Pickup", "Mail"],
+    default: "Mail",
   },
   amount: {
     type: Number,
@@ -43,6 +44,10 @@ const OrderSchema = mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 

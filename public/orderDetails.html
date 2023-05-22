@@ -1,12 +1,163 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Order Details</title>
-</head>
-<body>
-  <h1>Order Details</h1>
 
-  <div id="orderDetails"></div>
-  <script src="orderDetails.js"></script>
+<head>
+  <!-- set the encoding of your site -->
+  <meta charset="utf-8">
+  <!-- set the Compatible of your site -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- set the page title -->
+  <title>Order Details</title>
+  <!-- include the site Google Fonts stylesheet -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap"
+    rel="stylesheet">
+  <!-- include the site bootstrap stylesheet -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- include the site fontawesome stylesheet -->
+  <link rel="stylesheet" href="css/fontawesome.css">
+  <!-- include the site stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- include theme plugins setting stylesheet -->
+  <link rel="stylesheet" href="css/plugins.css">
+  <!-- include theme color setting stylesheet -->
+  <link rel="stylesheet" href="css/color.css">
+  <!-- include theme responsive setting stylesheet -->
+  <link rel="stylesheet" href="css/responsive.css">
+  <!--
+  <link rel="stylesheet" href="css/ratings.css">-->
+</head>
+
+<body>
+<script src="orderDetails.js"></script>
+  <!-- pageWrapper -->
+  <div id="pageWrapper">
+    <!-- header -->
+    <header id="header" class="position-relative">
+      <!-- headerHolderCol -->
+      <div class="headerHolderCol pt-lg-4 pb-lg-5 py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <a href="javascript:void(0);" class="tel d-flex align-items-end"><i class="icon-call mr-2"></i> Hotline:
+                (602) 462 8889</a>
+            </div>
+            <div class="col-12 col-sm-4 text-center">
+              <span class="txt d-block">Welcome To BookSwap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- headerHolder -->
+      <div class="headerHolder container pt-lg-5 pb-lg-7 py-4">
+        <div class="row">
+          <div class="col-6 col-sm-2">
+            <!-- mainLogo -->
+            <div class="logo">
+              <a href="search.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
+            </div>
+          </div>
+          <div class="col-6 col-sm-7 col-lg-8 static-block">
+            <!-- mainHolder -->
+            <div class="mainHolder pt-lg-5 pt-3 justify-content-center">
+              <!-- pageNav2 -->
+              <nav class="navbar navbar-expand-lg navbar-light p-0 pageNav2 position-static">
+                <button type="button" class="navbar-toggle collapsed position-relative" data-toggle="collapse"
+                  data-target="#navbarNav" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <div class="nav-item" id="navbarNav">
+                  <ul class="navbar-nav mx-auto text-uppercase d-inline-block">
+                    <li class="nav-item">
+                      <a class="d-block" href="search.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="addBook.html">Add Books</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="myOrders.html">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="ratings.html">Ratings & Review</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="contact-us.html">contact</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="about-us.html">About</a>
+                    </li>
+
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div class="col-sm-3 col-lg-2">
+            <!-- wishListII -->
+            <ul class="nav nav-tabs wishListII pt-5 justify-content-end border-bottom-0">
+              <li class="nav-item ml-0"><a class="nav-link icon-search" href="search.html"></a></li>
+              <li class="nav-item"><a class="nav-link icon-profile" href="javascript:void(0);"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div style="padding-bottom: 285px;">
+        <div
+      style="max-width: 600px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
+      <h1 style="font-size: 1.5rem; margin-bottom: 20px; text-align: center; color: #555;">Order Details</h1>
+
+      <h2 id="orderName" style="font-size: 1.2rem; margin-bottom: 10px; color: #555;"></h2>
+      <p id="orderStatus" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+      <p id="orderBuySellName" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+      <p id="orderDate" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+      <p id="orderDeliveryMethod" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+
+      <div id="buttonContainer" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+        <button id="acceptButton"
+          style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;"
+          onclick="hideAcceptButton()">Accept</button>
+        <button id="rejectButton"
+          style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Reject</button>
+        <button id="messageButton" class="message-button"
+          style="display: none; padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Send
+          Message</button>
+      </div>
+
+      <script>
+        function hideAcceptButton() {
+          var acceptButton = document.getElementById("acceptButton");
+          acceptButton.style.display = "none";
+          var messageButton = document.getElementById("messageButton");
+          messageButton.style.display = "block";
+        }
+      </script>
+    </div>
+      </div>
+      
+    </main>
+    
+    <!-- <div id="orderDetails">
+      
+    </div> -->
+
+<!-- footer -->
+<footer id="footer" class="overflow-hidden bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
+        <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
+
+
 </html>

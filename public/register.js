@@ -32,9 +32,10 @@ document
       alert("Registration successful!");
       // Store the userId in session storage
       sessionStorage.setItem("userId", res.data._id);
+      sessionStorage.setItem("userName", res.data.userName); //get first name
 
       // Redirect to the addBook.html page
-      window.location.href = "/home.html";
+      window.location.href = "/search.html";
     } else {
       alert(res.message);
     }
@@ -46,6 +47,6 @@ window.addEventListener("DOMContentLoaded", function () {
   if (userId) {
     // Session is set, user is logged in
     // Redirect to the addBook.html page
-    window.location.href = "/home.html";
+    window.location.href = "/search.html";
   }
 });
