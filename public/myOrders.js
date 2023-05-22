@@ -3,8 +3,9 @@ var userId;
 //check session is set
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (!checkSession()) return;
-  fetchOrders();
+  if (checkSession()) {
+    fetchOrders();
+  }
 });
 
 function checkSession() {
@@ -13,6 +14,8 @@ function checkSession() {
     // Session is set, user is logged in
     window.location.href = "/login.html";
     return false;
+  } else {
+    return true;
   }
 }
 
