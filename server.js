@@ -8,6 +8,13 @@ const db = require("./db");
 
 db();
 app.use(express.static(__dirname + "/public"));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self' font-src 'self' data:;"
+  );
+  next();
+});
 
 // Use body-parser middleware
 app.use(bodyParser.json());
@@ -53,10 +60,10 @@ io.on("connection", (socket) => {
 // Define routes for books
 app.get("/books", bookController.getBooks);
 app.get("/books/:id", bookController.getBookById);
-app.get("/books/search/:query", bookController.searchBooks);
 app.get("/books/user/:id", bookController.getBooksByUserId);
 app.post("/books", bookController.createBook);
 app.delete("/books/:id", bookController.deleteBook);
+app.post("/books/search", bookController.searchBooks);
 
 // Define routes for users
 app.get("/users", userController.getUsers);

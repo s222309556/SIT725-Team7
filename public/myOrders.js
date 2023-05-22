@@ -45,7 +45,7 @@ function populateOrders(orders, element) {
     // Create the main container for each received order
     const orderContainer = document.createElement("div");
     orderContainer.style.cssText =
-      "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);";
+      "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left;";
 
     // Create the order details
     const orderTitle = document.createElement("h3");

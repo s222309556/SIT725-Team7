@@ -102,7 +102,7 @@ function handleButtonClick() {
     .getElementById("createOrderBtn")
     .addEventListener("click", async function () {
       try {
-        const response = await fetch("/orders", {
+        fetch("/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -132,4 +132,12 @@ function handleButtonClick() {
         alert("An error occurred while creating the order.");
       }
     });
+
+  // wishlist
+  function changeHeartColor() {
+    var heartIcon = document.getElementById("heartIcon");
+    heartIcon.classList.toggle("far");
+    heartIcon.classList.toggle("fas");
+    heartIcon.classList.toggle("red");
+  }
 }

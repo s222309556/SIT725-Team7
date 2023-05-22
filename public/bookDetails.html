@@ -24,6 +24,51 @@
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- include sytlesheet -->
 	<link rel="stylesheet" href="css/bookdetails.css">
+
+	<style>
+		.heart {
+			color: red;
+			background-color: currentColor;
+			display: inline-block;
+			height: 50px;
+			margin: 0 10px;
+			position: static;
+			top: 0;
+			transform: rotate(-45deg);
+			position: absolute;
+			left: 45%;
+			top: 45%;
+			width: 50px;
+		  }
+		  
+		  .heart-checkbox {
+			display: none;
+		  }
+		  
+		  .heart::before,
+		  .heart::after {
+			content: "";
+			background-color: currentColor;
+			border-radius: 50%;
+			height: 50px;
+			position: absolute;
+			width: 50px;
+		  }
+		  
+		  .heart:before {
+			top: -25px;
+			left: 0;
+		  }
+		  
+		  .heart:after {
+			left: 25px;
+			top: 0;
+		  }
+		  
+		  .heart-checkbox:checked + .heart {
+			color: black;
+		  }
+	</style>
 	
 </head>
 <body>
@@ -39,7 +84,7 @@
 					<div class="col-6 col-sm-2">
 						<!-- mainLogo -->
 						<div class="logo">
-							<a href="home.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
+							<a href="search.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
 						</div>
 					</div>
 					<div class="col-6 col-sm-7 col-lg-8 static-block">
@@ -56,14 +101,17 @@
 								<div class="collapse navbar-collapse" id="navbarNav">
 									<ul class="navbar-nav mx-auto text-uppercase d-inline-block">
 										<li class="nav-item">
-											<a class="d-block" href="index.html">Home</a>
+											<a class="d-block" href="search.html">Home</a>
 										</li>
 										<li class="nav-item">
 											<a class="d-block" href="addBook.html">Add book</a>
 										</li>
 										<li class="nav-item">
-											<a class="d-block" href="myOrders.html">My Orders</a>
-										  </li>
+                                            <a class="d-block" href="myOrders.html">My Orders</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="d-block" href="ratings.html">Ratings & Review</a>
+                                        </li>
 										<li class="nav-item">
 											<a class="d-block" href="about-us.html">About</a>
 										</li>
@@ -78,8 +126,8 @@
 					<div class="col-sm-3 col-lg-2">
 						<!-- wishListII -->
 						<ul class="nav nav-tabs wishListII pt-5 justify-content-end border-bottom-0">
-							<li class="nav-item ml-0"><a class="nav-link icon-search" href="javascript:void(0);"></a></li>
-							<!-- <li class="nav-item"><a class="nav-link position-relative icon-cart" href="javascript:void(0);"><span class="num rounded d-block">2</span></a></li> -->
+							<!-- <li class="nav-item ml-0"><a class="nav-link icon-search" href="javascript:void(0);"></a></li> -->
+							<li class="nav-item ml-0"><a class="nav-link icon-search" href="search.html"></a></li>
 							<li class="nav-item"><a class="nav-link icon-profile" href="javascript:void(0);"></a></li>
 						</ul>
 					</div>
@@ -116,20 +164,32 @@
 							</ul>
 							
 							<div class="holder overflow-hidden d-flex flex-wrap mb-6" id="createOrderBtnWrapper">
-								<!-- <input type="number" placeholder="1"> -->
 								<a id="createOrderBtn" href="javascript:void(0);" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Request Book<i class="fas fa-arrow-right ml-2"></i></a>
 							</div>
-							
-							<!-- add to wishlist -->
-							<!-- <input type="checkbox" class="heart-checkbox" id="heart-checkbox">
-							<label for="heart-checkbox" class="heart">&#10084;</label> -->
-							
-							<p id="btn" onclick="myfunction()">&#10084;</p>
+
 						</div>
+
+						<!-- <div class="wrapper">
+							<input type="checkbox" class="heart-checkbox" id="heart-checkbox">
+							<label class="heart" for="heart-checkbox">&#10084;</label>
+						</div> -->
+
+						<div style="margin-bottom: 1rem;">
+							<label for="review-text" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
+								Review:</label>
+							<textarea id="review-text" rows="5" required
+								style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;"></textarea>
+						</div>
+
+						
+						<a id="submitReview" href="javascript:void(0);" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4" style="float:right">Submit Review</a>
+					
+						
 					</div>
 				</div>
-				
 			</div>
+
+				
 			
 		</main>
 		<!-- footer -->

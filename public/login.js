@@ -21,10 +21,10 @@ document
       // Store the userId in session storage
 
       sessionStorage.setItem("userId", res.data._id);
-      sessionStorage.setItem("userName", res.data.name.split(" ")[0]); //get first name
+      sessionStorage.setItem("userName", res.data.userName); //get first name
 
-      // Redirect to the addBook.html page
-      window.location.href = "/home.html";
+      // Redirect to the search.html page
+      window.location.href = "/search.html";
       // Redirect to the desired page after successful login
       // For example: window.location.href = "/dashboard.html";
     } else {
@@ -37,6 +37,6 @@ window.addEventListener("DOMContentLoaded", function () {
   const userId = sessionStorage.getItem("userId");
   if (userId) {
     // Session is set, user is logged in
-    window.location.href = "/home.html";
+    window.location.href = "/search.html";
   }
 });

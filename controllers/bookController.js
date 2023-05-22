@@ -13,6 +13,32 @@ exports.getBooks = async (req, res, next) => {
   }
 };
 
+//@desc     search books by params
+//@route    POST /books/search
+//@access   Public
+exports.searchBooks = async (req, res, next) => {
+  try {
+    const { bookTitle, authorName, bookIsbn, bookGenre } = req.body;
+    let query = {};
+    if (bookTitle) {
+      query.bookTitle = { $regex: new RegExp(bookTitle, "i") };
+    }
+    if (authorName) {
+      query.authorName = { $regex: new RegExp(authorName, "i") };
+    }
+    if (bookIsbn) {
+      query.bookIsbn = { $regex: new RegExp(bookIsbn, "i") };
+    }
+    if (bookGenre) {
+      query.bookGenre = { $regex: new RegExp(bookGenre, "i") };
+    }
+    const books = await Book.find(query);
+    res.status(200).json({ success: true, data: books });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 // @desc    Get book by id
 // @route   GET /books/:id
 // @access  Public
@@ -33,15 +59,15 @@ exports.getBookById = async (req, res, next) => {
 // @desc    Search books by full text
 // @route   GET /books/search/:query
 // @access  Public
-exports.searchBooks = async (req, res, next) => {
-  try {
-    const query = req.params.query;
-    const books = await Book.find({ $text: { $search: query } });
-    res.status(200).json({ success: true, data: books });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
+// exports.searchBooks = async (req, res, next) => {
+//   try {
+//     const query = req.params.query;
+//     const books = await Book.find({ $text: { $search: query } });
+//     res.status(200).json({ success: true, data: books });
+//   } catch (error) {
+//     res.status(400).json({ success: false, message: error.message });
+//   }
+// };
 
 // @desc    Get all books by user id
 // @route   GET /books/user/:id
