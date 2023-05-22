@@ -159,7 +159,7 @@ function handleButtonClick() {
     .getElementById("createOrderBtn")
     .addEventListener("click", async function () {
       try {
-        fetch("/orders", {
+        const response = fetch("/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
