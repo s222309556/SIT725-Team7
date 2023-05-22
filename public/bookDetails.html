@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<!-- set the encoding of your site -->
 	<meta charset="utf-8">
@@ -9,7 +10,9 @@
 	<!-- set the page title -->
 	<title>Book Swap</title>
 	<!-- include the site Google Fonts stylesheet -->
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap"
+		rel="stylesheet">
 	<!-- include the site bootstrap stylesheet -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- include the site fontawesome stylesheet -->
@@ -39,38 +42,39 @@
 			left: 45%;
 			top: 45%;
 			width: 50px;
-		  }
-		  
-		  .heart-checkbox {
+		}
+
+		.heart-checkbox {
 			display: none;
-		  }
-		  
-		  .heart::before,
-		  .heart::after {
+		}
+
+		.heart::before,
+		.heart::after {
 			content: "";
 			background-color: currentColor;
 			border-radius: 50%;
 			height: 50px;
 			position: absolute;
 			width: 50px;
-		  }
-		  
-		  .heart:before {
+		}
+
+		.heart:before {
 			top: -25px;
 			left: 0;
-		  }
-		  
-		  .heart:after {
+		}
+
+		.heart:after {
 			left: 25px;
 			top: 0;
-		  }
-		  
-		  .heart-checkbox:checked + .heart {
+		}
+
+		.heart-checkbox:checked+.heart {
 			color: black;
-		  }
+		}
 	</style>
-	
+
 </head>
+
 <body>
 	<script src="bookDetails.js"></script>
 	<!-- pageWrapper -->
@@ -78,7 +82,7 @@
 		<!-- header -->
 		<header id="header" class="position-relative">
 			<!-- headerHolderCol -->
-			
+
 			<div class="headerHolder container pt-lg-5 pb-lg-7 py-4">
 				<div class="row">
 					<div class="col-6 col-sm-2">
@@ -92,7 +96,8 @@
 						<div class="mainHolder pt-lg-5 pt-3 justify-content-center">
 							<!-- pageNav2 -->
 							<nav class="navbar navbar-expand-lg navbar-light p-0 pageNav2 position-static">
-								<button type="button" class="navbar-toggle collapsed position-relative" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+								<button type="button" class="navbar-toggle collapsed position-relative"
+									data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
 									<span class="sr-only">Toggle navigation</span>
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
@@ -107,11 +112,11 @@
 											<a class="d-block" href="addBook.html">Add book</a>
 										</li>
 										<li class="nav-item">
-                                            <a class="d-block" href="myOrders.html">My Orders</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="d-block" href="ratings.html">Ratings & Review</a>
-                                        </li>
+											<a class="d-block" href="myOrders.html">My Orders</a>
+										</li>
+										<li class="nav-item">
+											<a class="d-block" href="ratings.html">Ratings & Review</a>
+										</li>
 										<li class="nav-item">
 											<a class="d-block" href="about-us.html">About</a>
 										</li>
@@ -137,67 +142,65 @@
 		<!-- main -->
 		<main>
 			<!-- introBannerHolder -->
-		
+
 			<!-- twoColumns -->
 			<div class="twoColumns container pt-xl-23 pb-xl-20 pt-lg-20 pb-lg-20 py-md-16 py-10">
-				<div class="row mb-6">
-					<div class="col-12 col-lg-6 order-lg-1">
-						<!-- productSliderImage -->
-						<div class="productSliderImage mb-lg-0 mb-4">
-							<div>
-								<img src="http://placehold.it/570x635" alt="image description" class="img-fluid w-100">
-							</div>
-						</div>
+				<!-- productSliderImage -->
+				<div style="width:400px; float : left">
+					<div>
+						<img src="http://placehold.it/300x300" alt="image description" class="img-fluid w-100">
 					</div>
-					<div class="col-12 col-lg-6 order-lg-3">
-						<!-- productTextHolder -->
-						<div class="productTextHolder overflow-hidden">
-							<h2 class="fwEbold mb-2" id="bookName"></h2>
-							<!-- <strong class="price d-block mb-5 text-green">65.00 $</strong> -->
-							<p class="mb-5" id="bookDesc"></p>
-							<ul class="list-unstyled productInfoDetail mb-5 overflow-hidden">
-								<li class="mb-2">Book Title: <span id="bookTitle"></span></li>
-								<li class="mb-2">ISBN: <span id="bookIsbn"></span></li>
-								<li class="mb-2" >Author: <span id="bookAuthor"></span></li>
-								<li class="mb-2" >Genre: <span id="genre"></span></li>
-								<li class="mb-2" >Description: <span id="description"></span></li>
-							</ul>
-							
-							<div class="holder overflow-hidden d-flex flex-wrap mb-6" id="createOrderBtnWrapper">
-								<a id="createOrderBtn" href="javascript:void(0);" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Request Book<i class="fas fa-arrow-right ml-2"></i></a>
-							</div>
+				</div>
+				<!-- <div> -->
+				<!-- productTextHolder -->
+				<div class="productTextHolder overflow-hidden" style="width:50%; padding-left:20px">
+					<h2 class="fwEbold mb-2" id="bookName"></h2>
+					<!-- <strong class="price d-block mb-5 text-green">65.00 $</strong> -->
+					<p class="mb-5" id="bookDesc"></p>
+					<ul class="list-unstyled productInfoDetail mb-5 overflow-hidden">
+						<li class="mb-2">Book Title: <span id="bookTitle"></span></li>
+						<li class="mb-2">ISBN: <span id="bookIsbn"></span></li>
+						<li class="mb-2">Author: <span id="bookAuthor"></span></li>
+						<li class="mb-2">Genre: <span id="genre"></span></li>
+						<li class="mb-2">Description: <span id="description"></span></li>
+					</ul>
 
-						</div>
-
-						<!-- <div class="wrapper">
-							<input type="checkbox" class="heart-checkbox" id="heart-checkbox">
-							<label class="heart" for="heart-checkbox">&#10084;</label>
-						</div> -->
-
-						<div style="margin-bottom: 1rem;">
-							<label for="review-text" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
-								Review:</label>
-							<textarea id="review-text" rows="5" required
-								style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;"></textarea>
-						</div>
-
-						
-						<a id="submitReview" href="javascript:void(0);" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4" style="float:right">Submit Review</a>
-					
-						
+					<div class="holder overflow-hidden d-flex flex-wrap mb-6" id="createOrderBtnWrapper">
+						<a id="createOrderBtn" href="javascript:void(0);"
+							class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Request
+							Book<i class="fas fa-arrow-right ml-2"></i></a>
 					</div>
+
+				</div>
+
+				<div id="existingReviews" style="margin-top: 200px;">
+					<!-- Existing reviews will be dynamically added here -->
+				</div>
+
+				<div style="margin-bottom: 1rem; margin-top:50px">
+					<label for="review-text" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
+						Review:</label>
+					<textarea id="reviewText" rows="5" required
+						style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;"></textarea>
+				</div>
+
+				<div class="holder overflow-hidden d-flex flex-wrap mb-6" id="createOrderBtnWrapper">
+					<a id="createReviewBtn" href="javascript:void(0);"
+						class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Submit<i
+							class="fas fa-arrow-right ml-2"></i></a>
 				</div>
 			</div>
 
-				
-			
+
+
 		</main>
 		<!-- footer -->
 		<footer id="footer" class="overflow-hidden bg-dark">
 			<div class="container">
 				<div class="row">
 					<div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
-						<p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+						<p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right
+							reserved</p>
 					</div>
 				</div>
 			</div>
@@ -212,4 +215,5 @@
 	<!-- include custom JavaScript -->
 	<script src="js/jqueryCustome.js"></script>
 </body>
+
 </html>

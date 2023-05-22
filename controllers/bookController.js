@@ -114,3 +114,24 @@ exports.deleteBook = async (req, res, next) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// @desc    Add review to book
+// @route   PUT /books/:id/review
+// @access  Public
+exports.addReview = async (req, res, next) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (!book) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Book not found" });
+    }
+    const { userId, review, userName } = req.body;
+    const newReview = { userId, review, userName };
+    book.bookReviews.push(newReview);
+    await book.save();
+    res.status(200).json({ success: true, data: book });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

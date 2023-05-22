@@ -64,6 +64,7 @@ app.get("/books/user/:id", bookController.getBooksByUserId);
 app.post("/books", bookController.createBook);
 app.delete("/books/:id", bookController.deleteBook);
 app.post("/books/search", bookController.searchBooks);
+app.put("/books/:id/review", bookController.addReview);
 
 // Define routes for users
 app.get("/users", userController.getUsers);

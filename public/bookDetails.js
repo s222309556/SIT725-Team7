@@ -7,6 +7,7 @@ var userId;
 window.addEventListener("DOMContentLoaded", function () {
   checkSession();
   fetchBookDetails();
+  handleSubmitReview();
 });
 
 function checkSession() {
@@ -36,13 +37,35 @@ async function fetchBookDetails() {
       const book = data.data;
       bookOwnerId = book.userId;
       bookTitle = book.bookTitle;
-      console.log(book);
       // Generate the book details HTML
       document.getElementById("bookTitle").innerText = book.bookTitle;
       document.getElementById("bookIsbn").innerText = book.bookIsbn;
       document.getElementById("bookAuthor").innerText = book.authorName;
       document.getElementById("description").innerText = book.bookDescription;
       document.getElementById("genre").innerText = book.bookGenre;
+
+      // Function to generate the HTML for a review
+      const generateReviewHTML = (review) => {
+        return `
+								<div class="review">
+								  <p style='font-size:25px'>${review.review}</p>
+								  <p>By : ${review.userName}</p>
+								</div>
+							  `;
+      };
+
+      let sampleReviews = [];
+      sampleReviews = book.bookReviews;
+      const existingReviewsDiv = document.getElementById("existingReviews");
+      if (sampleReviews.length > 0) {
+        existingReviewsDiv.innerHTML = "<h3>Reviews</h3><hr>";
+        sampleReviews.forEach((review) => {
+          const reviewHTML = generateReviewHTML(review);
+          existingReviewsDiv.insertAdjacentHTML("beforeend", reviewHTML);
+        });
+      } else {
+        existingReviewsDiv.innerHTML = "<h3>No reviews yet</h3>";
+      }
 
       if (userId == bookOwnerId) {
         document.getElementById("createOrderBtn").style.display = "none";
@@ -67,7 +90,6 @@ async function checkOrder() {
     bookId: bookId,
     buyerId: userId,
   };
-  console.log("params - ", params);
   try {
     const response = await fetch(`/orders/checkOrderExist`, {
       method: "POST",
@@ -95,6 +117,41 @@ async function checkOrder() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function handleSubmitReview() {
+  document
+    .getElementById("createReviewBtn")
+    .addEventListener("click", async function () {
+      try {
+        fetch(`/books/${bookId}/review`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName: sessionStorage.getItem("userName"),
+            userId: userId,
+            review: document.getElementById("reviewText").value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.success) {
+              alert("Review created successfully!");
+              //refresh the page
+              window.location.reload();
+              // Redirect or perform any other action after order creation
+              // For example: window.location.href = "/home.html";
+            } else {
+              alert(res.message);
+            }
+          });
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while creating the review.");
+      }
+    });
 }
 
 function handleButtonClick() {
