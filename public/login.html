@@ -15,7 +15,9 @@
     <!-- set the page title -->
     <title>Book Swap</title>
     <!-- include the site Google Fonts stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap"
+      rel="stylesheet">
     <!-- include the site bootstrap stylesheet -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <!-- include the site fontawesome stylesheet -->
@@ -30,119 +32,120 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- include sytlesheet -->
     <link rel="stylesheet" href="css/bookdetails.css">
-    
+
   </head>
 
-  
-  <style type = text/css> 
+
+  <style type=text/css>
     body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
-  }
-  
-  .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  form {
-    margin-top: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input,
-  select,
-  textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  p {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  a {
-    color: #4CAF50;
-  }
-  
-    </style>
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #4CAF50;
+    }
+  </style>
 </head>
+
 <body>
-<!-- pageWrapper -->
-<div id="pageWrapper">
-  <!-- header -->
-  <header id="header" class="position-relative">
-    <!-- headerHolderCol -->
+  <!-- pageWrapper -->
+  <div id="pageWrapper">
+    <!-- header -->
+    <header id="header" class="position-relative">
+      <!-- headerHolderCol -->
 
-  <!-- mainLogo -->
-  <div class="col-6 col-sm-8">
-    <!-- mainLogo -->
-    <div class="logo">
-      <a href="home.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
-    </div>
-  </div>
-
-  <main mb-3>
-  <h1>Login</h1>
-  <div class="container">
-  <form id="loginForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" required><br>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" required><br>
-    
-    <button type="submit" value="Login"> Login </button>
-  </form>
-  <p>Don't have an Account ? <a href="register.html">Sign up</a></p>
-  </div> 
-
-  </main>
-  
-  <!-- footer -->
-<footer id="footer" class="overflow-hidden bg-dark">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
-        <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+      <!-- mainLogo -->
+      <div class="col-6 col-sm-8">
+        <!-- mainLogo -->
+        <div class="logo">
+          <a href="home.html"><img src="images/logo.png" alt="Botanical" class="img-fluid" style="height: 220px;"></a>
+        </div>
       </div>
-    </div>
+
+      <main>
+        <h1>Login</h1>
+        <div class="container" style="margin-bottom: 220px; margin-top: 50px">
+          <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br>
+
+            <button type="submit" value="Login"> Login </button>
+          </form>
+          <p>Don't have an Account ? <a href="register.html">Sign up</a></p>
+        </div>
+
+      </main>
+
+      <!-- footer -->
+      <!-- <footer id="footer" class="overflow-hidden bg-dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
+              <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+            </div>
+          </div>
+        </div>
+      </footer> -->
   </div>
-</footer>
-</div>
-  
+
   <script src="login.js"></script>
 </body>
+
 </html>
