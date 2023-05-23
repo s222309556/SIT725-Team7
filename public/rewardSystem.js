@@ -55,4 +55,22 @@ function updatePointsDisplay() {
     </div>
   </div>
   `;
+
+
+  // Create card to show rating and points
+let ratingsCard = document.createElement('div');
+ratingsCard.className = 'col-lg-4 mb-4';
+ratingsCard.innerHTML = `
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Profile Ratings</h5>
+    <p class="card-text">
+      <i class="fa fa-trophy gold"></i> Gold: 30 Points <br>
+      <i class="fa fa-trophy silver"></i> Silver: 20 Points <br>
+      <i class="fa fa-trophy bronze"></i> Bronze: 10 Points
+    </p>
+    <p class="card-text">Your rating: <span id="user-rating" class="${getRating(userData.points).toLowerCase()}">${getRating(userData.points)}</span></p>
+  </div>
+</div>
+`;
   
