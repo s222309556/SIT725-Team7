@@ -92,4 +92,17 @@ exchangeCard.innerHTML = `
   </div>
 </div>
 `;
+
+
+// Add cards to the row
+let rewardsRow = document.getElementById('rewards-row');
+rewardsRow.appendChild(pointsCard);
+rewardsRow.appendChild(ratingsCard);
+rewardsRow.appendChild(exchangeCard);
+
+// Add event listener to form
+let exchangeForm = document.getElementById('exchange-form');
+exchangeForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
   
