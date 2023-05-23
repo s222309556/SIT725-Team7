@@ -105,4 +105,18 @@ let exchangeForm = document.getElementById('exchange-form');
 exchangeForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  
+ // Get the book title
+ let bookTitle = document.getElementById('book-title').value;
+
+ // Check if the book title is valid
+ if (bookTitle.trim() !== '') {
+     // Increase user's points
+     userData.points += 5;
+
+     // Update points display
+     updatePointsDisplay();
+
+     // Reset the form
+     exchangeForm.reset();
+ }
+});
