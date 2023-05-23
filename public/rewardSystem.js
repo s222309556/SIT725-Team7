@@ -73,4 +73,23 @@ ratingsCard.innerHTML = `
   </div>
 </div>
 `;
+
+
+// Create card to exchange a book
+let exchangeCard = document.createElement('div');
+exchangeCard.className = 'col-lg-4 mb-4';
+exchangeCard.innerHTML = `
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Exchange a Book</h5>
+    <form id="exchange-form">
+      <div class="form-group">
+        <label for="book-title">Book Title</label>
+        <input type="text" class="form-control" id="book-title" placeholder="Enter book title">
+      </div>
+      <button type="submit" class="btn btn-primary">Exchange</button>
+    </form>
+  </div>
+</div>
+`;
   
