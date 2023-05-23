@@ -120,3 +120,30 @@ exchangeForm.addEventListener('submit', function(event) {
      exchangeForm.reset();
  }
 });
+
+
+
+// Fetch user points
+let userPoints = userData.points;
+
+// Get the redeem points display and button elements
+let redeemPointsDisplay = document.getElementById('redeem-points');
+let redeemButton = document.getElementById('redeem-button');
+
+// Function to update redeem points display
+function updateRedeemPointsDisplay() {
+    redeemPointsDisplay.textContent = `${userPoints} Points`;
+    redeemButton.disabled = userPoints < 100;
+}
+
+// Update redeem points display initially
+updateRedeemPointsDisplay();
+
+// Add event listener to redeem button
+redeemButton.addEventListener('click', function() {
+    if (userPoints >= 100) {
+        userPoints -= 100;
+        updateRedeemPointsDisplay();
+        alert('Congratulations! You have redeemed a free book.');
+    }
+});
