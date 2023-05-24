@@ -30,7 +30,7 @@
 </head>
 
 <body>
-<script src="orderDetails.js"></script>
+  <script src="orderDetails.js"></script>
   <!-- pageWrapper -->
   <div id="pageWrapper">
     <!-- header -->
@@ -44,7 +44,9 @@
                 (602) 462 8889</a>
             </div>
             <div class="col-12 col-sm-4 text-center">
-              <span class="txt d-block">Welcome To BookSwap</span>
+              <span class="txt d-block">Wellcome To BookSwap</span>
+            </div>
+            <div class="col-12 col-sm-4">
             </div>
           </div>
         </div>
@@ -110,53 +112,54 @@
     <main>
       <div style="padding-bottom: 285px;">
         <div
-      style="max-width: 600px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
-      <h1 style="font-size: 1.5rem; margin-bottom: 20px; text-align: center; color: #555;">Order Details</h1>
+          style="max-width: 600px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
+          <h1 style="font-size: 1.5rem; margin-bottom: 20px; text-align: center; color: #555;">Order Details</h1>
 
-      <h2 id="orderName" style="font-size: 1.2rem; margin-bottom: 10px; color: #555;"></h2>
-      <p id="orderStatus" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
-      <p id="orderBuySellName" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
-      <p id="orderDate" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
-      <p id="orderDeliveryMethod" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+          <h2 id="orderName" style="font-size: 1.2rem; margin-bottom: 10px; color: #555;"></h2>
+          <p id="orderStatus" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+          <p id="orderBuySellName" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+          <p id="orderDate" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
+          <p id="orderDeliveryMethod" style="font-size: 1rem; color: #777; margin-bottom: 10px;"></p>
 
-      <div id="buttonContainer" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-        <button id="acceptButton"
-          style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;"
-          onclick="hideAcceptButton()">Accept</button>
-        <button id="rejectButton"
-          style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Reject</button>
-        <button id="messageButton" class="message-button"
-          style="display: none; padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Send
-          Message</button>
+          <div id="buttonContainer"
+            style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <button id="acceptButton"
+              style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;"
+              onclick="hideAcceptButton()">Accept</button>
+            <button id="rejectButton"
+              style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Reject</button>
+            <button id="messageButton" class="message-button"
+              style="display: none; padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Send
+              Message</button>
+          </div>
+
+          <script>
+            function hideAcceptButton() {
+              var acceptButton = document.getElementById("acceptButton");
+              acceptButton.style.display = "none";
+              var messageButton = document.getElementById("messageButton");
+              messageButton.style.display = "block";
+            }
+          </script>
+        </div>
       </div>
 
-      <script>
-        function hideAcceptButton() {
-          var acceptButton = document.getElementById("acceptButton");
-          acceptButton.style.display = "none";
-          var messageButton = document.getElementById("messageButton");
-          messageButton.style.display = "block";
-        }
-      </script>
-    </div>
-      </div>
-      
     </main>
-    
+
     <!-- <div id="orderDetails">
       
     </div> -->
 
-<!-- footer -->
-<footer id="footer" class="overflow-hidden bg-dark">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
-        <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+    <!-- footer -->
+    <footer id="footer" class="overflow-hidden bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
+            <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right reserved</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 </body>
 
 
