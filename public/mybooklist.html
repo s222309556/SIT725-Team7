@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Books</title>
+  <style>
+    body {
+      font-family: BlinkMacSystemFont, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    .button-container {
+      text-align: right;
+    }
+
+    .button-container button {
+      background-color: #5ba515;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .button-container button:hover {
+      background-color: #4c910d;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Books</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Book data rows will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <script>
+    // Sample book data (replace with actual data from the database)
+    const books = [
+      {
+        title: "Book 1",
+        author: "Author 1",
+        genre: "Fiction"
+      },
+      {
+        title: "Book 2",
+        author: "Author 2",
+        genre: "Non-Fiction"
+      }
+    ];
+
+    // Function to generate HTML for each book row
+    function generateBookRow(book) {
+      const row = document.createElement('tr');
+      const titleCell = document.createElement('td');
+      titleCell.textContent = book.title;
+      row.appendChild(titleCell);
+
+      const authorCell = document.createElement('td');
+      authorCell.textContent = book.author;
+      row.appendChild(authorCell);
+
+      const genreCell = document.createElement('td');
+      genreCell.textContent = book.genre;
+      row.appendChild(genreCell);
+
+      const actionsCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        // Function to delete the book from the database
+        deleteBook(book);
+        // Remove the row from the table
+        row.remove();
+      });
+      actionsCell.appendChild(deleteButton);
+
+      const updateButton = document.createElement('button');
+      updateButton.textContent = 'Update';
+      updateButton.addEventListener('click', () => {
+        // Function to update the book
+        updateBook(book);
+      });
+      actionsCell.appendChild(updateButton);
+
+      row.appendChild(actionsCell);
+
+      return row;
+    }
+
+    // Function to display the books in the table
+    function displayBooks() {
+      const tbody = document.querySelector('tbody');
+
+      books.forEach((book) => {
+        const row = generateBookRow(book);
+        tbody.appendChild(row);
+      });
+    }
+
+    // Function to delete a book (replace with actual delete logic)
+    function deleteBook(book) {
+      console.log(`Deleting book: ${book.title}`);
+    }
+
+    // Function to update a book (replace with actual update logic)
+    function updateBook(book) {
+      console.log(`Updating book: ${book.title}`);
+    }
+
+    // Display the books on page load
+    displayBooks();
+  </script>
+</body>
+
+</html>
