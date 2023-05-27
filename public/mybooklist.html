@@ -24,7 +24,8 @@
       margin-bottom: 30px;
     }
 
-    th, td {
+    th,
+    td {
       padding: 10px;
       text-align: left;
       border-bottom: 1px solid #ccc;
@@ -52,6 +53,18 @@
     .button-container button:hover {
       background-color: #4c910d;
     }
+
+    .edit-form-container {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .edit-form-container input[type="text"],
+    .edit-form-container select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 
@@ -72,6 +85,26 @@
     </tbody>
   </table>
 
+  <div class="edit-form-container">
+    <h3>Edit Book</h3>
+    <form id="editForm">
+      <label for="editTitle">Title:</label>
+      <input type="text" id="editTitle" name="editTitle" required>
+
+      <label for="editAuthor">Author:</label>
+      <input type="text" id="editAuthor" name="editAuthor" required>
+
+      <label for="editGenre">Genre:</label>
+      <select id="editGenre" name="editGenre" required>
+        <option value="fiction">Fiction</option>
+        <option value="non-fiction">Non-Fiction</option>
+        <option value="fantasy">Fantasy</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
   <script>
     // Sample book data (replace with actual data from the database)
     const books = [
@@ -83,6 +116,21 @@
       {
         title: "Book 2",
         author: "Author 2",
+        genre: "Non-Fiction"
+      },
+      {
+        title: "Book 3",
+        author: "Author 3",
+        genre: "Fantasy"
+      },
+      {
+        title: "Book 4",
+        author: "Author 4",
+        genre: "Fiction"
+      },
+      {
+        title: "Book 5",
+        author: "Author 5",
         genre: "Non-Fiction"
       }
     ];
@@ -116,8 +164,7 @@
       const updateButton = document.createElement('button');
       updateButton.textContent = 'Update';
       updateButton.addEventListener('click', () => {
-        // Function to update the book
-        updateBook(book);
+        showEditForm(book);
       });
       actionsCell.appendChild(updateButton);
 
@@ -141,9 +188,42 @@
       console.log(`Deleting book: ${book.title}`);
     }
 
-    // Function to update a book (replace with actual update logic)
-    function updateBook(book) {
-      console.log(`Updating book: ${book.title}`);
+    // Function to show the edit form and pre-fill with book details
+    function showEditForm(book) {
+      const editForm = document.getElementById('editForm');
+      const editTitleInput = document.getElementById('editTitle');
+      const editAuthorInput = document.getElementById('editAuthor');
+      const editGenreSelect = document.getElementById('editGenre');
+
+      editTitleInput.value = book.title;
+      editAuthorInput.value = book.author;
+      editGenreSelect.value = book.genre;
+
+      editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Update book details with the form values (replace with actual update logic)
+        book.title = editTitleInput.value;
+        book.author = editAuthorInput.value;
+        book.genre = editGenreSelect.value;
+
+        // Hide the edit form
+        hideEditForm();
+      });
+
+      showElement('edit-form-container');
+    }
+
+    // Function to hide the edit form
+    function hideEditForm() {
+      const editFormContainer = document.querySelector('.edit-form-container');
+      editFormContainer.style.display = 'none';
+    }
+
+    // Function to show an element by ID
+    function showElement(elementId) {
+      const element = document.getElementById(elementId);
+      element.style.display = 'block';
     }
 
     // Display the books on page load
