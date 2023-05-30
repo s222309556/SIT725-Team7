@@ -176,6 +176,12 @@ function handleAccept() {
               console.error(resBook.message);
             }
           }
+
+          /////////////Point Calculation/////////////////////
+          // if req.status == "Completed" then calculate points
+          ////LOGIC////////
+          //Call the API to calculate points
+
           //reload page
           window.location.reload();
         } else {
