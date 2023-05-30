@@ -231,11 +231,7 @@
             </div>
 
     <!-- Points Redeem System Section -->
-    <div
-        style="width: 48.25%; margin: 2rem auto; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
-        <h2
-            style="font-size: 1.5rem; color: #555; text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-            Points Redeem System</h2>
+    
 
         <!-- Points System Section -->
         <div
@@ -264,111 +260,59 @@
             </div>
         </div>
 
-        <div
-            style="width: 80%; margin: 2rem auto; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
-            <h2
-                style="font-size: 1.5rem; color: #555; text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-                Points Redeem System</h2>
+        
 
             <!-- Points Redeem System Section -->
             <div style="width: 80%; margin: 2rem auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
                 <!-- Your Points Section -->
-                <div
-                    style="width: 48%; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Your Points:</h3>
-                    <p style="font-size: 1rem; color: #777;">You currently have 250 points.</p>
-                </div>
-
-                <!-- Your Tier Section -->
-                <div
-                    style="width: 48%; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Your Tier:</h3>
-                    <p style="font-size: 1rem; color: #777;">You are in the Silver tier.</p>
-                </div>
-
-                <!-- Points to Next Tier Section -->
-                <div
-                    style="width: 48%; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Points to Next Tier:</h3>
-                    <p style="font-size: 1rem; color: #777;">50 points</p>
-                    <div
-                        style="width: 100%; height: 20px; background-color: #ddd; border-radius: 5px; overflow: hidden;">
-                        <div style="height: 100%; width: 50%; background-color: #007bff;"></div>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                    <!-- Current Points Container -->
+                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
+                      <h2 style="text-transform: uppercase;">My Current Points</h2>
+                      <p id="points" style="font-size: 48px; margin: 0;">0</p>
+                      <p>Points to Next Tier</p>
+                      <progress id="pointsProgressToNextTier" value="0" max="10" style="width: 100%; height: 20px;"></progress>
+                      <p>Points to Free Voucher</p>
+                      <progress id="pointsProgressToVoucher" value="0" max="50" style="width: 100%; height: 20px;"></progress>
+                      <p>Points to Free Book</p>
+                      <progress id="pointsProgressToBook" value="0" max="100" style="width: 100%; height: 20px;"></progress>
                     </div>
-                </div>
-
-                <!-- Redeem Your Points Section -->
-                <div
-                    style="width: 48%; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Redeem Your Points:</h3>
-                    <form id="redeem-points-form">
-                        <!-- Add Content Here -->
-                        <button type="submit"
-                            style="cursor: pointer; padding: .375rem 1rem; background-color: #007bff; color: #fff; border: none; border-radius: .25rem;">Redeem
-                            Points</button>
-                    </form>
-                </div>
+                  
+                    <!-- Tier Information Container -->
+                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
+                      <h2 style="text-transform: uppercase;">My Tier</h2>
+                      <p id="tier">Browns</p>
+                      <p id="tierInfo">0-10: Browns<br>10-20: Silver<br>20-30: Gold<br>30+: Platinum</p>
+                    </div>
+                  
+                    <!-- Point Gaining Container -->
+                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
+                      <h2 style="text-transform: uppercase;">Gain Points</h2>
+                      <form onsubmit="event.preventDefault(); addPoints();">
+                        <input type="text" id="exchangeCode" placeholder="Enter exchange code" required>
+                        <button type="submit">Exchange Book</button>
+                      </form>
+                    </div>
+                  
+                    <!-- Point Redeeming Container -->
+                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
+                      <h2 style="text-transform: uppercase;">Redeem Points</h2>
+                      <select id="redeemSelect">
+                        <option value="50">50 points - New voucher code</option>
+                        <option value="100">100 points - New book promo code</option>
+                      </select>
+                      <button onclick="redeemPoints()">Redeem Points</button>
+                    </div>
+                  </div>
+                  <script src="ratings.js"></script>
             </div>
 
-        </div>
+        
     </div>
 
 
 
-    <!-- Write a Review Section -->
-    <div
-        style="width: 48.25%; margin: 2rem auto; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
-        <h2
-            style="font-size: 1.5rem; color: #555; text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-            Write a Review</h2>
-        <form id="review-form" style="padding: 20px;">
-            <div style="margin-bottom: 1rem;">
-                <label for="user-name" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
-                    Name:</label>
-                <input type="text" id="user-name" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="user-email" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
-                    Email:</label>
-                <input type="email" id="user-email" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="user-contact" style="display: block; font-weight: 700; margin-bottom: .5rem;">Contact
-                    Number:</label>
-                <input type="tel" id="user-contact" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="book-title" style="display: block; font-weight: 700; margin-bottom: .5rem;">Book
-                    Title:</label>
-                <input type="text" id="book-title" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="book-author" style="display: block; font-weight: 700; margin-bottom: .5rem;">Book
-                    Author:</label>
-                <input type="text" id="book-author" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="book-genre" style="display: block; font-weight: 700; margin-bottom: .5rem;">Book
-                    Genre:</label>
-                <input type="text" id="book-genre" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="review-text" style="display: block; font-weight: 700; margin-bottom: .5rem;">Your
-                    Review:</label>
-                <textarea id="review-text" rows="5" required
-                    style="display: block; width: 100%; padding: .375rem .75rem; border: 1px solid #ced4da; border-radius: .25rem;"></textarea>
-            </div>
-            <button type="submit"
-                style="cursor: pointer; padding: .375rem 1rem; background-color: #007bff; color: #fff; border: none; border-radius: .25rem; float: right;">Submit
-                Review</button>
-        </form>
-    </div>
+  
 
 
 
