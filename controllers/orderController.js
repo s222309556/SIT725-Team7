@@ -81,7 +81,7 @@ exports.createOrder = async (req, res, next) => {
 // @access  Public
 exports.updateOrder = async (req, res, next) => {
   try {
-    const updateOrder = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     if (!updateOrder) {

@@ -1,5 +1,6 @@
 var userId;
 var orderId;
+var order;
 var sellerId;
 var buyerId;
 var orderName;
@@ -13,6 +14,8 @@ var buyer;
 document.addEventListener("DOMContentLoaded", function () {
   checkSession();
   fetchOrderDetails();
+  handleAccept();
+  handleReject();
 });
 
 //check session is set
@@ -38,7 +41,7 @@ async function fetchOrderDetails() {
     const response = await fetch(`/orders/${orderId}`);
     const res = await response.json();
     if (res.success) {
-      const order = res.data;
+      order = res.data;
       sellerId = order.sellerId;
       buyerId = order.buyerId;
       orderStatus = order.status;
@@ -58,19 +61,41 @@ async function fetchOrderDetails() {
         if (resBuyer.success) {
           buyer = resBuyer.data;
 
+          if (order.status == "Accepted" || order.status == "Pending") {
+            document.getElementById("acceptCompletButton").innerText =
+              "Complete";
+          } else if (order.status == "Completed") {
+            document.getElementById("acceptCompletButton").style =
+              "display:none";
+            document.getElementById("rejectButton").style = "display:none";
+          }
+
           document.getElementById("orderName").innerText = orderName;
-          document.getElementById("orderStatus").innerText = orderStatus;
-          document.getElementById("orderDate").innerText = orderDate;
+          document.getElementById("orderStatus").innerText =
+            "Status : " + orderStatus;
+          document.getElementById("orderDate").innerText =
+            "Date : " + orderDate;
           document.getElementById("orderDeliveryMethod").innerText =
-            orderDeliveryMethod;
+            "Delivery Method : " + orderDeliveryMethod;
           if (userId == sellerId) {
             document.getElementById("orderBuySellName").innerText =
               "Buyer Name : " + buyer.name;
+            if (orderStatus == "Pending" && order.isSenderCompleted) {
+              //if seller has completed the order then hide the button for seller
+              document.getElementById("acceptCompletButton").style =
+                "display:none";
+            }
           } else {
             document.getElementById("orderBuySellName").innerText =
               "Seller Name : " + seller.name;
-            //hide acceptButton
-            document.getElementById("acceptButton").style.display = "none";
+            if (orderStatus == "Pending" && order.isSenderCompleted) {
+              //if seller has completed the order then show 'Complete' button to buyer
+              document.getElementById("acceptCompletButton").innerHTML =
+                "Complete";
+            } else {
+              document.getElementById("acceptCompletButton").style =
+                "display:none";
+            }
           }
         } else {
           console.error(resBuyer.message);
@@ -84,4 +109,124 @@ async function fetchOrderDetails() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function handleAccept() {
+  document
+    .getElementById("acceptCompletButton")
+    .addEventListener("click", async () => {
+      try {
+        let req = {};
+        if (order.status == "Accepted" || order.status == "Pending") {
+          if (userId == sellerId) {
+            if (order.isReceiverCompleted) {
+              req = {
+                status: "Completed",
+                isSenderCompleted: true,
+              };
+            } else {
+              req = {
+                status: "Pending",
+                isSenderCompleted: true,
+              };
+            }
+          } else if (userId == buyerId) {
+            if (order.isSenderCompleted) {
+              req = {
+                status: "Completed",
+                isReceiverCompleted: true,
+              };
+            } else {
+              req = {
+                status: "Pending",
+                isReceiverCompleted: true,
+              };
+            }
+          }
+        } else {
+          req = {
+            status: "Accepted",
+          };
+        }
+
+        const response = await fetch(`/orders/${orderId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(req),
+        });
+        const res = await response.json();
+        if (res.success) {
+          //updateBook
+          if (req.status == "Accepted") {
+            const responseBook = await fetch(`/books/${order.bookId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                isActive: false,
+              }),
+            });
+            const resBook = await responseBook.json();
+            if (resBook.success) {
+              console.log("Book updated");
+            } else {
+              console.error(resBook.message);
+            }
+          }
+          //reload page
+          window.location.reload();
+        } else {
+          console.error(res.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+}
+
+//function to 'rejectButton'
+function handleReject() {
+  document
+    .getElementById("rejectButton")
+    .addEventListener("click", async () => {
+      try {
+        const response = await fetch(`/orders/${orderId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: "Rejected",
+          }),
+        });
+        const res = await response.json();
+        if (res.success) {
+          //updateBook
+          const responseBook = await fetch(`/books/${order.bookId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              isActive: true,
+            }),
+          });
+          const resBook = await responseBook.json();
+          if (resBook.success) {
+            console.log("Book updated");
+          } else {
+            console.error(resBook.message);
+          }
+          //reload page
+          window.location.reload();
+        } else {
+          console.error(res.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
 }

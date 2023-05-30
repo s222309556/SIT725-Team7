@@ -6,7 +6,8 @@ const Book = require("../models/Book");
 // @access  Public
 exports.getBooks = async (req, res, next) => {
   try {
-    const books = await Book.find();
+    //where isActive == true
+    const books = await Book.find({ isActive: true });
     res.status(200).json({ success: true, data: books });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
@@ -20,6 +21,7 @@ exports.searchBooks = async (req, res, next) => {
   try {
     const { bookTitle, authorName, bookIsbn, bookGenre } = req.body;
     let query = {};
+    query.isActive = true;
     if (bookTitle) {
       query.bookTitle = { $regex: new RegExp(bookTitle, "i") };
     }
@@ -98,6 +100,25 @@ exports.createBook = async (req, res, next) => {
   }
 };
 
+// @desc    Update book
+// @route   PUT /books/:id
+// @access  Public
+exports.updateBook = async (req, res, next) => {
+  try {
+    const updateBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updateBook) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Book not found" });
+    }
+    res.status(200).json({ success: true, data: updateBook });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 // @desc    Delete book
 // @route   DELETE /books/:id
 // @access  Public
@@ -129,6 +150,36 @@ exports.addReview = async (req, res, next) => {
     const { userId, review, userName } = req.body;
     const newReview = { userId, review, userName };
     book.bookReviews.push(newReview);
+    await book.save();
+    res.status(200).json({ success: true, data: book });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Delete review from book
+// @route   DELETE /books/:id/review/:reviewId
+// @access  Public
+exports.deleteReview = async (req, res, next) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (!book) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Book not found" });
+    }
+    const review = book.bookReviews.find(
+      (review) => review._id.toString() === req.params.reviewId
+    );
+    if (!review) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Review not found" });
+    }
+    const removeIndex = book.bookReviews
+      .map((review) => review._id.toString())
+      .indexOf(req.params.reviewId);
+    book.bookReviews.splice(removeIndex, 1);
     await book.save();
     res.status(200).json({ success: true, data: book });
   } catch (error) {

@@ -169,7 +169,6 @@ function handleButtonClick() {
             bookId: bookId,
             buyerId: sessionStorage.getItem("userId"),
             sellerId: bookOwnerId,
-            status: "Pending",
           }),
         })
           .then((res) => res.json())
