@@ -22,6 +22,7 @@ Theme URI: http://www.htmlbeans.com/html/botanical/
   border-radius: 5px;
   padding: 10px;
   display: none;
+  margin-top: 5px;
 }
 
 .messages {
