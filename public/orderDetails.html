@@ -30,6 +30,7 @@
 </head>
 
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
   <script src="orderDetails.js"></script>
   <!-- pageWrapper -->
   <div id="pageWrapper">
@@ -127,10 +128,15 @@
               style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Accept</button>
             <button id="rejectButton"
               style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Reject</button>
-            <button id="messageButton" class="message-button"
-              style="display: none; padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Send
-              Message</button>
+            <button id="chatBtn" class="message-button"
+              style="padding: 10px 20px; font-size: 1rem; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer; margin: 0 10px;">Message</button>
           </div>
+          <div id="chatBox" class="chat-box">
+            <div id="messages" class="messages"></div>
+            <input type="text" id="userInput" class="user-input" placeholder="Type your message...">
+            <button id="sendBtn">Send</button><button id="closeBtn" style="margin-left:10px">Close</button>
+          </div>
+
 
           <script>
             function hideAcceptButton() {

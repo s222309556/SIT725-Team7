@@ -31,8 +31,6 @@ const orderController = require("./controllers/orderController");
 // ... previous server code ...
 
 io.on("connection", (socket) => {
-  console.log("A user connected");
-
   // Listen for chat messages from the client
   socket.on("chatMessage", async (messageObj) => {
     try {
@@ -42,13 +40,14 @@ io.on("connection", (socket) => {
           senderId: messageObj.senderId,
           receiverId: messageObj.receiverId,
           message: messageObj.message,
+          orderId: messageObj.orderId,
         },
       });
 
       // Emit the message to all connected clients
       io.emit("message", createdMessage.body);
     } catch (error) {
-      console.error("Error saving message:", error);
+      console.error("Error saving message:", error.message);
     }
   });
 
@@ -91,8 +90,13 @@ app.put("/orders/:id", orderController.updateOrder);
 app.post("/messages", messageController.createMessage);
 app.get("/messages/sender/:id", messageController.getMessageBySenderId);
 app.get("/messages/receiver/:id", messageController.getMessageByReceiverId);
+app.post("/messages/messageHistory", messageController.messageHistory);
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
+
+http.listen(port, () => {
+  console.log(`listing on port ${port}`);
 });
