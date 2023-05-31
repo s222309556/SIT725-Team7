@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookIsbn: bookIsbn,
       bookGenre: bookGenre,
       userId: sessionStorage.getItem("userId"),
+      userName: sessionStorage.getItem("userName"),
     };
 
     // Perform an AJAX request to send the book data to the server
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.success) {
           // Book added successfully, redirect to a success page or perform any other action
           alert("Book added successfully!");
-          window.location.href = "/home.html"; // Redirect to success page
+          window.location.href = "/search.html"; // Redirect to success page
         } else {
           console.error(data.message);
           // Error occurred while adding the book, handle the error or display an error message

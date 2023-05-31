@@ -23,16 +23,17 @@ const OrderSchema = mongoose.Schema({
   },
   deliveryMethod: {
     type: String,
-    enum: ["Pickup", "Delivery"],
+    enum: ["Pickup", "Mail"],
+    default: "Mail",
   },
   amount: {
     type: Number,
   },
   status: {
     type: String,
-    enum: ["Pending", "Accepted", "Rejected", "Completed"],
+    enum: ["On Hold", "Accepted", "Rejected", "Pending", "Completed"],
     required: true,
-    default: "Pending",
+    default: "On Hold",
   },
   isSenderCompleted: {
     type: Boolean,
@@ -43,6 +44,10 @@ const OrderSchema = mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 

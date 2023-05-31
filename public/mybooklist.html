@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Books</title>
+  <style>
+    body {
+      font-family: BlinkMacSystemFont, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    .button-container {
+      text-align: right;
+    }
+
+    .button-container button {
+      background-color: #5ba515;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .button-container button:hover {
+      background-color: #4c910d;
+    }
+
+    .edit-form-container {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .edit-form-container input[type="text"],
+    .edit-form-container select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Books</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Book data rows will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <div class="edit-form-container">
+    <h3>Edit Book</h3>
+    <form id="editForm">
+      <label for="editTitle">Title:</label>
+      <input type="text" id="editTitle" name="editTitle" required>
+
+      <label for="editAuthor">Author:</label>
+      <input type="text" id="editAuthor" name="editAuthor" required>
+
+      <label for="editGenre">Genre:</label>
+      <select id="editGenre" name="editGenre" required>
+        <option value="fiction">Fiction</option>
+        <option value="non-fiction">Non-Fiction</option>
+        <option value="fantasy">Fantasy</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <script>
+    // Sample book data 
+    const books = [
+      {
+        title: "Book 1",
+        author: "Author 1",
+        genre: "Fiction"
+      },
+      {
+        title: "Book 2",
+        author: "Author 2",
+        genre: "Non-Fiction"
+      },
+      {
+        title: "Book 3",
+        author: "Author 3",
+        genre: "Fantasy"
+      },
+      {
+        title: "Book 4",
+        author: "Author 4",
+        genre: "Fiction"
+      },
+      {
+        title: "Book 5",
+        author: "Author 5",
+        genre: "Non-Fiction"
+      }
+    ];
+
+    // Function to generate HTML for each book row
+    function generateBookRow(book) {
+      const row = document.createElement('tr');
+      const titleCell = document.createElement('td');
+      titleCell.textContent = book.title;
+      row.appendChild(titleCell);
+
+      const authorCell = document.createElement('td');
+      authorCell.textContent = book.author;
+      row.appendChild(authorCell);
+
+      const genreCell = document.createElement('td');
+      genreCell.textContent = book.genre;
+      row.appendChild(genreCell);
+
+      const actionsCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        // Function to delete the book from the database
+        deleteBook(book);
+        // Remove the row from the table
+        row.remove();
+      });
+      actionsCell.appendChild(deleteButton);
+
+      const updateButton = document.createElement('button');
+      updateButton.textContent = 'Update';
+      updateButton.addEventListener('click', () => {
+        showEditForm(book);
+      });
+      actionsCell.appendChild(updateButton);
+
+      row.appendChild(actionsCell);
+
+      return row;
+    }
+
+    // Function to display the books in the table
+    function displayBooks() {
+      const tbody = document.querySelector('tbody');
+
+      books.forEach((book) => {
+        const row = generateBookRow(book);
+        tbody.appendChild(row);
+      });
+    }
+
+    // Function to delete a book (replace with actual delete logic)
+    function deleteBook(book) {
+      console.log(`Deleting book: ${book.title}`);
+    }
+
+    // Function to show the edit form and pre-fill with book details
+    function showEditForm(book) {
+      const editForm = document.getElementById('editForm');
+      const editTitleInput = document.getElementById('editTitle');
+      const editAuthorInput = document.getElementById('editAuthor');
+      const editGenreSelect = document.getElementById('editGenre');
+
+      editTitleInput.value = book.title;
+      editAuthorInput.value = book.author;
+      editGenreSelect.value = book.genre;
+
+      editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Update book details with the form values (replace with actual update logic)
+        book.title = editTitleInput.value;
+        book.author = editAuthorInput.value;
+        book.genre = editGenreSelect.value;
+
+        // Hide the edit form
+        hideEditForm();
+      });
+
+      showElement('edit-form-container');
+    }
+
+    // Function to hide the edit form
+    function hideEditForm() {
+      const editFormContainer = document.querySelector('.edit-form-container');
+      editFormContainer.style.display = 'none';
+    }
+
+    // Function to show an element by ID
+    function showElement(elementId) {
+      const element = document.getElementById(elementId);
+      element.style.display = 'block';
+    }
+
+    // Display the books on page load
+    displayBooks();
+  </script>
+</body>
+
+</html>
