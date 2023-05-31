@@ -60,7 +60,7 @@ function populateBooks(books) {
     // Create the book cover element
     const bookCover = document.createElement("div");
     bookCover.style.cssText =
-      "width: 100%; height: 200px; background-color: #ddd; border-radius: 5px; margin-bottom: 10px;";
+      "width: 100%; height: 200px; background-color: #ddd; border-radius: 5px; margin-bottom: 10px; background-image: url('images/noBook.jpg'); background-position-x: center; background-position-y: center; background-size: cover;";
     bookContainer.appendChild(bookCover);
 
     // Create the book information section
