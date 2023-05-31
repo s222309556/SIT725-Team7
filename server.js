@@ -67,6 +67,7 @@ app.post("/books", bookController.createBook);
 app.delete("/books/:id", bookController.deleteBook);
 app.post("/books/search", bookController.searchBooks);
 app.put("/books/:id/review", bookController.addReview);
+app.put("/books/:id", bookController.updateBook);
 
 // Define routes for users
 app.get("/users", userController.getUsers);
@@ -84,6 +85,7 @@ app.get("/orders/:id", orderController.getOrderById);
 app.get("/orders/buyerId/:id", orderController.getOrdersByBuyerId);
 app.get("/orders/sellerId/:id", orderController.getOrdersBySellerId);
 app.post("/orders/checkOrderExist", orderController.checkOrderExist);
+app.put("/orders/:id", orderController.updateOrder);
 
 // Define routes for messages
 app.post("/messages", messageController.createMessage);

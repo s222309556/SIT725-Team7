@@ -62,9 +62,22 @@ function populateOrders(orders, element) {
   orders.forEach((order) => {
     // Create the main container for each received order
     const orderContainer = document.createElement("div");
-    orderContainer.style.cssText =
-      "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left;";
-
+    if (order.status === "On Hold") {
+      orderContainer.style.cssText =
+        "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left; height:230px";
+    } else if (order.status === "Accepted") {
+      orderContainer.style.cssText =
+        "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left; height:230px; background-color:#faf8b9";
+    } else if (order.status === "Rejected") {
+      orderContainer.style.cssText =
+        "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left; height:230px; background-color:#ffe6e6";
+    } else if (order.status === "Pending") {
+      orderContainer.style.cssText =
+        "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left; height:230px; background-color:#f5f5f5";
+    } else if (order.status === "Completed") {
+      orderContainer.style.cssText =
+        "background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); width:300px; margin-right:20px; text-align:center; float:left; height:230px; background-color:#b9fae1";
+    }
     // Create the order details
     const orderTitle = document.createElement("h3");
     const orderDate = document.createElement("p");
@@ -79,7 +92,7 @@ function populateOrders(orders, element) {
 
     orderStatus.innerText = `Status: ${order.status}`;
     orderStatus.style.cssText =
-      "font-size: 1rem; color: #777; margin-bottom: 10px;";
+      "font-size: 1rem; color: #777; margin-bottom: 10px; font-weight: bold";
 
     orderContainer.appendChild(orderTitle);
     orderContainer.appendChild(orderDate);
@@ -88,17 +101,17 @@ function populateOrders(orders, element) {
     // Create the buttons
     //Don't show Accept button for sent orders
 
-    if (element === "received-orders-container") {
-      const acceptButton = createButton("Accept", "orderDetails.html");
-      orderContainer.appendChild(acceptButton);
-    }
-    const rejectButton = createButton("Reject", "orderDetails.html");
+    // if (element === "received-orders-container") {
+    //   const acceptButton = createButton("Accept", "orderDetails.html");
+    //   orderContainer.appendChild(acceptButton);
+    // }
+    // const rejectButton = createButton("Reject", "orderDetails.html");
     const viewOrderButton = createButton(
       "View Order",
       "orderDetails.html?id=" + order._id
     );
 
-    orderContainer.appendChild(rejectButton);
+    //orderContainer.appendChild(rejectButton);
     orderContainer.appendChild(viewOrderButton);
 
     // Append the order container to the main container
