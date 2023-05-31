@@ -252,7 +252,7 @@ function handleOpenChat() {
     document.getElementById("chatBox").style.display = "block";
     clearMessages();
     loadMessageHistory();
-    recieveMessages();
+    listenToMessage();
   });
 
   document.getElementById("sendBtn").addEventListener("click", function () {
@@ -268,17 +268,17 @@ function handleOpenChat() {
       };
       socket.emit("chatMessage", messageObj);
 
-      var messagesContainer = document.getElementById("messages");
-      messagesContainer.innerHTML +=
-        "<div class='message'><span style='font-style: italic;'>You:</span> " +
-        message +
-        "</div>";
+      // var messagesContainer = document.getElementById("messages");
+      // messagesContainer.innerHTML +=
+      //   "<div class='message'><span style='font-style: italic;'>You:</span> " +
+      //   message +
+      //   "</div>";
       userInput.value = "";
     }
   });
 }
 
-function recieveMessages() {
+function listenToMessage() {
   // Event listener for receiving messages from the server
   socket.on("message", (message) => {
     var messagesContainer = document.getElementById("messages");

@@ -43,9 +43,8 @@ io.on("connection", (socket) => {
           orderId: messageObj.orderId,
         },
       });
-
       // Emit the message to all connected clients
-      io.emit("message", createdMessage.body);
+      io.emit("message", createdMessage);
     } catch (error) {
       console.error("Error saving message:", error.message);
     }
