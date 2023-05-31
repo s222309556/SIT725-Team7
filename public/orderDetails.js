@@ -179,8 +179,11 @@ function handleAccept() {
 
           /////////////Point Calculation/////////////////////
           // if req.status == "Completed" then calculate points
-          ////LOGIC////////
-          //Call the API to calculate points
+          if (req.status == "Completed") {
+            // Add points to the user
+            addPoints();
+        
+        }
 
           //reload page
           window.location.reload();
