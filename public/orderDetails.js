@@ -250,7 +250,9 @@ function handleReject() {
 function handleOpenChat() {
   document.getElementById("chatBtn").addEventListener("click", function () {
     document.getElementById("chatBox").style.display = "block";
+    clearMessages();
     loadMessageHistory();
+    recieveMessages();
   });
 
   document.getElementById("sendBtn").addEventListener("click", function () {
@@ -274,6 +276,18 @@ function handleOpenChat() {
       userInput.value = "";
     }
   });
+}
+
+function recieveMessages() {
+  // Event listener for receiving messages from the server
+  socket.on("message", (message) => {
+    var messagesContainer = document.getElementById("messages");
+    messagesContainer.innerHTML += populateMessage(message);
+  });
+}
+
+function clearMessages() {
+  document.getElementById("messages").innerHTML = "";
 }
 
 function loadMessageHistory() {

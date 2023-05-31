@@ -52,7 +52,6 @@ exports.createMessage = async (req, res, next) => {
 // @access  Public
 exports.messageHistory = async (req, res, next) => {
   try {
-    console.log(req.body);
     const messages = await Message.find({
       orderId: req.body.orderId,
     }).sort({ createdAt: 1 });
