@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Swap</title>
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif; 
+      background-color: #F5F5F5;
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh;
+      margin: 0;
+      color: #3C3C3C;
+    }
+    .container {
+      width: 300px; 
+      padding: 20px; 
+      background-color: #FFF; 
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.1);
+      margin: 10px;
+      border-radius: 15px;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
+    }
+    h2 {
+      color: #3C3C3C;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    p, form, select {
+      width: 100%;
+      text-align: center; 
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    progress {
+      width: 80%;
+      height: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    progress[value]::-webkit-progress-bar {
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+    progress[value]::-webkit-progress-value {
+      background-color: #3C3C3C;
+      border-radius: 10px;
+      transition: width 0.3s ease-in-out;
+    }
+    button {
+      width: 80%;
+      padding: 10px;
+      font-size: 18px;
+      color: #FFF;
+      background-color: #3C3C3C;
+      border: none;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #5C5C5C;
+    }
+    input, select {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #3C3C3C;
+      font-size: 16px;
+    }
+    #points {
+      font-size: 36px;
+      font-weight: bold;
+      color: #3C3C3C;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+  <!-- Current Points Container -->
+  <div class="container">
+    <h2>My Current Points</h2>
+    <p id="points">0</p>
+    <p>Points to Next Tier</p>
+    <progress id="pointsProgressToNextTier" value="0" max="10"></progress>
+    <p>Points to Free Voucher</p>
+    <progress id="pointsProgressToVoucher" value="0" max="50"></progress>
+    <p>Points to Free Book</p>
+    <progress id="pointsProgressToBook" value="0" max="100"></progress>
+  </div>
+
+  <!-- Tier Information Container -->
+  <div class="container">
+    <h2>My Tier</h2>
+    <p id="tier">Browns</p>
+    <p id="tierInfo">0-10: Browns<br>10-20: Silver<br>20-30: Gold<br>30+: Platinum</p>
+  </div>
+
+  <!-- Point Gaining Container -->
+  <div class="container">
+    <h2>Gain Points</h2>
+    <form onsubmit="event.preventDefault(); addPoints();">
+      <input type="text" id="exchangeCode" placeholder="Enter exchange code" required>
+      <button type="submit">Exchange Book</button>
+    </form>
+  </div>
+
+  <!-- Point Redeeming Container -->
+  <div class="container">
+    <h2>Redeem Points</h2>
+    <select id="redeemSelect">
+      <option value="50">50 points - New voucher code</option>
+      <option value="100">100 points - New book promo code</option>
+    </select>
+    <button onclick="redeemPoints()">Redeem Points</button>
+  </div>
+</div>
+
+<script>
+  var points = 0;
+  var tier = "Browns";
+
+  // Function to add points
+  function addPoints() {
+    points += 5;
+    document.getElementById("points").innerHTML = points;
+    updateProgressBars();
+    updateTier();
+  }
+
+  // Function to update progress bars
+  function updateProgressBars() {
+    var nextTierPoints = (tier == "Browns" ? 10 : (tier == "Silver" ? 20 : (tier == "Gold" ? 30 : 40)));
+    document.getElementById("pointsProgressToNextTier").value = (points % nextTierPoints);
+    document.getElementById("pointsProgressToVoucher").value = (points % 50);
+    document.getElementById("pointsProgressToBook").value = (points % 100);
+  }
+
+  // Function to update tier
+  function updateTier() {
+    if (points > 30) {
+      tier = "Platinum";
+    } else if (points > 20) {
+      tier = "Gold";
+    } else if (points > 10) {
+      tier = "Silver";
+    } else {
+      tier = "Browns";
+    }
+    document.getElementById("tier").innerHTML = tier;
+  }
+
+  // Function to redeem points
+  function redeemPoints() {
+    var redeemValue = document.getElementById("redeemSelect").value;
+    if (points >= redeemValue) {
+      // Generate random voucher code
+      var voucherCode = Math.floor(1000 + Math.random() * 9000);
+      alert("Your voucher code is: " + voucherCode);
+      points -= redeemValue;
+      document.getElementById("points").innerHTML = points;
+      updateProgressBars();
+      updateTier();
+    } else {
+      alert("You don't have enough points to redeem.");
+    }
+  }
+</script>
+
+</body>
+</html>
