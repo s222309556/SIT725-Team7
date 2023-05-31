@@ -267,13 +267,12 @@ function handleOpenChat() {
         message: message,
       };
       socket.emit("chatMessage", messageObj);
-
-      // var messagesContainer = document.getElementById("messages");
-      // messagesContainer.innerHTML +=
-      //   "<div class='message'><span style='font-style: italic;'>You:</span> " +
-      //   message +
-      //   "</div>";
       userInput.value = "";
+      // Scroll to the bottom of the chat box
+      var messagesContainer = document.getElementById("messages");
+      setTimeout(function () {
+        messagesContainer.scrollTo(0, messagesContainer.scrollHeight);
+      }, 100);
     }
   });
 }
@@ -308,6 +307,10 @@ function loadMessageHistory() {
           var messagesContainer = document.getElementById("messages");
           messagesContainer.innerHTML += populateMessage(messages[i]);
         }
+        var messagesContainer = document.getElementById("messages");
+        setTimeout(function () {
+          messagesContainer.scrollTo(0, messagesContainer.scrollHeight);
+        }, 100);
       } else {
         console.error(data.message);
       }
