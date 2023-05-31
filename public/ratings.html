@@ -260,55 +260,57 @@
             </div>
         </div>
 
-        
+    
+
+
 
             <!-- Points Redeem System Section -->
-            <div style="width: 80%; margin: 2rem auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <!-- Your Points Section -->
-                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-                    <!-- Current Points Container -->
-                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
-                      <h2 style="text-transform: uppercase;">My Current Points</h2>
-                      <p id="points" style="font-size: 48px; margin: 0;">0</p>
-                      <p>Points to Next Tier</p>
-                      <progress id="pointsProgressToNextTier" value="0" max="10" style="width: 100%; height: 20px;"></progress>
-                      <p>Points to Free Voucher</p>
-                      <progress id="pointsProgressToVoucher" value="0" max="50" style="width: 100%; height: 20px;"></progress>
-                      <p>Points to Free Book</p>
-                      <progress id="pointsProgressToBook" value="0" max="100" style="width: 100%; height: 20px;"></progress>
-                    </div>
-                  
-                    <!-- Tier Information Container -->
-                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
-                      <h2 style="text-transform: uppercase;">My Tier</h2>
-                      <p id="tier">Browns</p>
-                      <p id="tierInfo">0-10: Browns<br>10-20: Silver<br>20-30: Gold<br>30+: Platinum</p>
-                    </div>
-                  
-                    <!-- Point Gaining Container -->
-                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
-                      <h2 style="text-transform: uppercase;">Gain Points</h2>
-                      <form onsubmit="event.preventDefault(); addPoints();">
-                        <input type="text" id="exchangeCode" placeholder="Enter exchange code" required>
-                        <button type="submit">Exchange Book</button>
-                      </form>
-                    </div>
-                  
-                    <!-- Point Redeeming Container -->
-                    <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); padding: 15px; transition: 0.3s; border-radius: 5px;">
-                      <h2 style="text-transform: uppercase;">Redeem Points</h2>
-                      <select id="redeemSelect">
-                        <option value="50">50 points - New voucher code</option>
-                        <option value="100">100 points - New book promo code</option>
-                      </select>
-                      <button onclick="redeemPoints()">Redeem Points</button>
-                    </div>
-                  </div>
-                  <script src="ratings.js"></script>
-            </div>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 960px; margin: 50px auto;">
+  
+                <!-- Current Points Container -->
+                <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
+                  <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">My Current Points</h2>
+                  <p id="points" style="font-size: 3em; margin: 0;">0</p>
+                  <p>Points to Next Tier</p>
+                  <progress id="pointsProgressToNextTier" value="0" max="10" style="width: 100%; height: 20px;"></progress>
+                  <p>Points to Free Voucher</p>
+                  <progress id="pointsProgressToVoucher" value="0" max="50" style="width: 100%; height: 20px;"></progress>
+                  <p>Points to Free Book</p>
+                  <progress id="pointsProgressToBook" value="0" max="100" style="width: 100%; height: 20px;"></progress>
+                </div>
+              
+                <!-- Tier Information Container -->
+                <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
+                  <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">My Tier</h2>
+                  <p id="tier" style="font-size: 1.5em; margin: 0;">Browns</p>
+                  <p id="tierInfo" style="margin-top: 10px;">0-10: Browns<br>10-20: Silver<br>20-30: Gold<br>30+: Platinum</p>
+                </div>
+              
+                <!-- Point Gaining Container -->
+                <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
+                  <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">Gain Points</h2>
+                  <form onsubmit="event.preventDefault(); addPoints();" style="display: flex; justify-content: space-between;">
+                    <input type="text" id="exchangeCode" placeholder="Enter exchange code" required style="flex: 1; margin-right: 10px; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                    <button type="submit" style="background-color: #007BFF; color: #fff; border: none; padding: 10px; border-radius: 5px; cursor: pointer; transition: 0.3s;">Exchange Book</button>
+                  </form>
+                </div>
+              
+                <!-- Point Redeeming Container -->
+                <div style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
+                  <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">Redeem Points</h2>
+                  <select id="redeemSelect" style="padding: 10px; border-radius: 5px; border: 1px solid #ddd; width: 100%; margin-bottom: 10px;">
+                    <option value="50">50 points - New voucher code</option>
+                    <option value="100">100 points - New book promo code</option>
+                  </select>
+                  <button onclick="redeemPoints()" style="background-color: #007BFF; color: #fff; border: none; padding: 10px; border-radius: 5px; cursor: pointer; transition: 0.3s;">Redeem Points</button>
+                </div>
+                <script src="ratings.js"></script>
+              </div>
 
         
-    </div>
+
+            
+        </div>      
 
 
 
