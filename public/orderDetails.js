@@ -283,7 +283,7 @@ function listenToMessage() {
   var messagesContainer = document.getElementById("messages");
   setTimeout(function () {
     messagesContainer.scrollTo(0, messagesContainer.scrollHeight);
-  }, 100);
+  }, 500);
 }
 
 function clearMessages() {
@@ -311,7 +311,7 @@ function loadMessageHistory() {
         var messagesContainer = document.getElementById("messages");
         setTimeout(function () {
           messagesContainer.scrollTo(0, messagesContainer.scrollHeight);
-        }, 100);
+        }, 500);
       } else {
         console.error(data.message);
       }
