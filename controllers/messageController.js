@@ -40,7 +40,28 @@ exports.getMessageBySenderId = async (req, res, next) => {
 exports.createMessage = async (req, res, next) => {
   try {
     const message = await Message.create(req.body);
-    res.status(201).json({ success: true, data: message });
+    return message;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+// @desc    Post  messageHistory by orderId,senderId,receiverId acs order by createdAt
+// @route   POST /messages/history
+// @access  Public
+exports.messageHistory = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const messages = await Message.find({
+      orderId: req.body.orderId,
+    }).sort({ createdAt: 1 });
+    if (!messages) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Messages not found" });
+    }
+    res.status(200).json({ success: true, data: messages });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }

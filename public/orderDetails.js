@@ -10,12 +10,18 @@ var orderDeliveryMethod;
 
 var seller;
 var buyer;
+var socket;
+var otherEndName;
+var otherEndId;
 
 document.addEventListener("DOMContentLoaded", function () {
+  socket = io();
   checkSession();
   fetchOrderDetails();
   handleAccept();
   handleReject();
+  handleOpenChat();
+  handleCloseChat();
 });
 
 //check session is set
@@ -80,6 +86,8 @@ async function fetchOrderDetails() {
           if (userId == sellerId) {
             document.getElementById("orderBuySellName").innerText =
               "Buyer Name : " + buyer.name;
+            otherEndName = buyer.userName;
+            otherEndId = buyerId;
             if (orderStatus == "Pending" && order.isSenderCompleted) {
               //if seller has completed the order then hide the button for seller
               document.getElementById("acceptCompletButton").style =
@@ -88,6 +96,8 @@ async function fetchOrderDetails() {
           } else {
             document.getElementById("orderBuySellName").innerText =
               "Seller Name : " + seller.name;
+            otherEndName = seller.userName;
+            otherEndId = sellerId;
             if (orderStatus == "Pending" && order.isSenderCompleted) {
               //if seller has completed the order then show 'Complete' button to buyer
               document.getElementById("acceptCompletButton").innerHTML =
@@ -235,4 +245,82 @@ function handleReject() {
         console.error(error);
       }
     });
+}
+
+function handleOpenChat() {
+  document.getElementById("chatBtn").addEventListener("click", function () {
+    document.getElementById("chatBox").style.display = "block";
+    loadMessageHistory();
+  });
+
+  document.getElementById("sendBtn").addEventListener("click", function () {
+    var userInput = document.getElementById("userInput");
+    var message = userInput.value;
+    if (message.trim() !== "") {
+      // Send the message to the server
+      let messageObj = {
+        senderId: userId,
+        receiverId: otherEndId,
+        orderId: orderId,
+        message: message,
+      };
+      socket.emit("chatMessage", messageObj);
+
+      var messagesContainer = document.getElementById("messages");
+      messagesContainer.innerHTML +=
+        "<div class='message'><span style='font-style: italic;'>You:</span> " +
+        message +
+        "</div>";
+      userInput.value = "";
+    }
+  });
+}
+
+function loadMessageHistory() {
+  //POST message/messageHistory
+  fetch("/messages/messageHistory", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      orderId: orderId,
+    }),
+  }).then((r) => {
+    r.json().then((res) => {
+      if (res.success) {
+        let messages = res.data;
+        for (let i = 0; i < messages.length; i++) {
+          var messagesContainer = document.getElementById("messages");
+          messagesContainer.innerHTML += populateMessage(messages[i]);
+        }
+      } else {
+        console.error(data.message);
+      }
+    });
+  });
+}
+
+function populateMessage(message) {
+  let messageHtml = "";
+  if (message.senderId == userId) {
+    messageHtml =
+      "<div class='message'><span style='font-style: italic;'>You : </span> " +
+      message.message +
+      "</div>";
+  } else {
+    messageHtml =
+      "<div class='message'><span style='font-weight: bold;'>" +
+      otherEndName +
+      " : </span> " +
+      message.message +
+      "</div>";
+  }
+  return messageHtml;
+}
+
+function handleCloseChat() {
+  document.getElementById("closeBtn").addEventListener("click", function () {
+    document.getElementById("chatBox").style.display = "none";
+  });
 }
