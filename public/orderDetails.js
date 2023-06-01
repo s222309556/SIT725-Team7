@@ -190,14 +190,28 @@ function handleAccept() {
           /////////////Point Add/////////////////////
           // if req.status == "Completed" then calculate points
           if (req.status == "Completed") {
+            //update seller points and profile level
+            let sellerProfileLevel = seller.profileLevel;
+            let sellerPoints = seller.totalPoints + 5;
+            let sellerRedeemPoints = seller.redeemPoints + 5;
+
+            if (sellerPoints >= 100) {
+              sellerProfileLevel = "Gold";
+            } else if (sellerPoints >= 50) {
+              sellerProfileLevel = "Silver";
+            } else if (sellerPoints >= 10) {
+              sellerProfileLevel = "Bronze";
+            }
+
             fetch(`/users/${sellerId}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                redeemPoints: seller.redeemPoints + 5,
-                totalPoints: seller.totalPoints + 5,
+                redeemPoints: sellerPoints,
+                totalPoints: sellerRedeemPoints,
+                profileLevel: sellerProfileLevel,
               }),
             });
           }
