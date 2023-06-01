@@ -66,6 +66,7 @@ app.delete("/books/:id", bookController.deleteBook);
 app.post("/books/search", bookController.searchBooks);
 app.put("/books/:id/review", bookController.addReview);
 app.put("/books/:id", bookController.updateBook);
+app.post("/books/getBooksByIds", bookController.getBooksByIds);
 
 // Define routes for users
 app.get("/users", userController.getUsers);
@@ -75,6 +76,8 @@ app.put("/users/:id", userController.updateUser);
 app.delete("/users/:id", userController.deleteUser);
 app.post("/users/login", userController.loginUser);
 app.post("/users/register", userController.registerUser);
+app.put("/users/:id/addBook/:bookId", userController.addBook);
+app.put("/users/:id/removeBook/:bookId", userController.removeBook);
 
 // Define routes for orders
 app.post("/orders", orderController.createOrder);

@@ -120,3 +120,43 @@ exports.registerUser = async (req, res, next) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// @desc    add book to bookWishList
+// @route   PUT /users/:id/addBook/:bookId
+// @access  Public
+exports.addBook = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+    user.bookWishList.push(req.params.bookId);
+    await user.save();
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    remove book from bookWishList by bookId
+// @route   PUT /users/:id/removeBook/:bookId
+// @access  Public
+exports.removeBook = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+    user.bookWishList = user.bookWishList.filter(
+      (book) => book._id != req.params.bookId
+    );
+    await user.save();
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

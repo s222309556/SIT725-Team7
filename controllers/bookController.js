@@ -14,6 +14,18 @@ exports.getBooks = async (req, res, next) => {
   }
 };
 
+// @desc    Get list of books by ids
+// @route   Post /books/getBooksByIds/
+// @access  Public
+exports.getBooksByIds = async (req, res, next) => {
+  try {
+    const books = await Book.find({ _id: { $in: req.body.bookIds } });
+    res.status(200).json({ success: true, data: books });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 //@desc     search books by params
 //@route    POST /books/search
 //@access   Public
