@@ -120,3 +120,45 @@ exports.registerUser = async (req, res, next) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+
+// Points
+exports.addPoints = async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    if (!user) {
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    } else {
+      user.points += req.body.points;
+      user = await user.save();
+      res.status(200).json({
+        success: true,
+        data: user,
+        message: "Points added successfully",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+exports.updateUserPoints = async (req, res) => {
+  // Retrieve user from database
+  const user = await User.findById(req.params.userId);
+
+  // Update points
+  user.points += req.body.points;
+
+  // Save user back to the database
+  await user.save();
+
+  // Send response back to client
+  res.json(user);
+};
+

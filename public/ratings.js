@@ -2,12 +2,46 @@ var points = 0;
 var tier = "Browns";
 
 // Function to add points
-function addPoints() {
+// function addPoints() {
+//  points += 5;
+//  document.getElementById("points").innerHTML = points;
+// updateProgressBars();
+// updateTier();
+//}
+
+// Function to add points
+// Function to add points
+async function addPoints() {
   points += 5;
   document.getElementById("points").innerHTML = points;
   updateProgressBars();
   updateTier();
+
+  // Get the current userId from session storage
+  let userId = sessionStorage.getItem("userId");
+
+  // Make sure the userId is not null before making the request
+  if (userId) {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${userId}/points`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ points: points }), // Here you can replace 5 with any number of points you want to add
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  } else {
+    console.error('User is not logged in.');
+  }
 }
+
+
 
 // Function to update progress bars
 function updateProgressBars() {

@@ -77,6 +77,10 @@ app.put("/users/:id", userController.updateUser);
 app.delete("/users/:id", userController.deleteUser);
 app.post("/users/login", userController.loginUser);
 app.post("/users/register", userController.registerUser);
+app.put("/users/:id/points", userController.addPoints);
+app.put("/users/:userId/points", userController.updateUserPoints);
+
+
 
 // Define routes for orders
 app.post("/orders", orderController.createOrder);
