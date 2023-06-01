@@ -73,6 +73,8 @@ function getLeaderBoard() {
 
 function renderProfileInfo() {
   document.getElementById("currentPoints").innerText = user.totalPoints;
+  document.getElementById("redeemPoints").innerText =
+    "Points available to redeem : " + user.redeemPoints;
   document.getElementById("currentTier").innerText =
     "My Tier : " + user.profileLevel;
   document.getElementById("pointsToNextTier").innerText =
