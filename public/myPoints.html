@@ -30,6 +30,7 @@
 </head>
 
 <body>
+    <script src="myPoints.js"></script>
     <!-- pageWrapper -->
     <div id="pageWrapper">
         <!-- header -->
@@ -83,7 +84,7 @@
                                             <a class="d-block" href="myOrders.html">My Orders</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="d-block" href="ratings.html">Ratings & Review</a>
+                                            <a class="d-block" href="myPoints.html">My Points</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="d-block" href="contact-us.html">contact</a>
@@ -100,7 +101,7 @@
                         <!-- wishListII -->
                         <ul class="nav nav-tabs wishListII pt-5 justify-content-end border-bottom-0">
                             <li class="nav-item ml-0"><a class="nav-link icon-search" href="search.html"></a></li>
-                            <li class="nav-item"><a class="nav-link icon-profile" href="javascript:void(0);"></a></li>
+                            <li class="nav-item"><a class="nav-link icon-profile" href="logout.html"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -119,16 +120,20 @@
                 <!-- Current Points Container -->
                 <div
                     style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
-                    <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">My
-                        Current Points</h2>
-                    <p id="points" style="font-size: 3em; margin: 0;">0</p>
-                    <p>Points to Next Tier</p>
-                    <progress id="pointsProgressToNextTier" value="0" max="10"
+                    <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 10px;">My
+                        Total Points</h2>
+                    <p id="currentPoints" style="font-size: 3em; margin: 0;"></p>
+                    <h2 id="currentTier"
+                        style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-top: 10px; margin-bottom: 15px;">
+                    </h2>
+                    <p id="redeemPoints"></p>
+                    <p>Points to Next Tier : <span id="pointsToNextTier"></span></p>
+                    <progress id="pointsProgressToNextTier" value="0" max="100"
                         style="width: 100%; height: 20px;"></progress>
-                    <p>Points to Free Voucher</p>
-                    <progress id="pointsProgressToVoucher" value="0" max="50"
+                    <p>Points to Free Voucher : <span id="pointsToNextVoucher"></span></p>
+                    <progress id="pointsProgressToVoucher" value="0" max="100"
                         style="width: 100%; height: 20px;"></progress>
-                    <p>Points to Free Book</p>
+                    <p>Points to Free Book : <span id="pointsToFreeBook"></span></p>
                     <progress id="pointsProgressToBook" value="0" max="100"
                         style="width: 100%; height: 20px;"></progress>
                 </div>
@@ -136,11 +141,10 @@
                 <!-- Tier Information Container -->
                 <div
                     style="box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); padding: 15px; transition: 0.3s; border-radius: 5px; background-color: #fff; margin-bottom: 30px; width: 100%;">
-                    <h2 style="text-transform: uppercase; color: #555; font-size: 1.2em; margin-bottom: 15px;">My Tier
-                    </h2>
-                    <p id="tier" style="font-size: 1.5em; margin: 0;">Browns</p>
-                    <p id="tierInfo" style="margin-top: 10px;">0-10: Browns<br>10-20: Silver<br>20-30: Gold<br>30+:
-                        Platinum</p>
+                    <p id="tier" style="font-size: 1.5em; margin: 0;">How Tire is Calculated ?</p>
+                    <p id="tierInfo" style="margin-top: 10px;">0-10 : None<br>10-50 : Bronze<br>50-100 : Silver<br>100+
+                        :
+                        Gold</p>
                 </div>
 
                 <!-- Point Gaining Container -->
@@ -168,7 +172,7 @@
                         <option value="50">50 points - New voucher code</option>
                         <option value="100">100 points - New book promo code</option>
                     </select>
-                    <button onclick="redeemPoints()"
+                    <button id="redeemButton"
                         style="background-color: #007BFF; color: #fff; border: none; padding: 10px; border-radius: 5px; cursor: pointer; transition: 0.3s;">Redeem
                         Points</button>
                 </div>
@@ -180,112 +184,7 @@
                 <h2
                     style="font-size: 1.5rem; color: #555; text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
                     Leaderboard</h2>
-
-                <!-- User 1 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">1. John Doe</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 500</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 25</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Gold Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 2 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">2. Jane Smith</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 400</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 20</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Silver Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 3 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">3. Mike Johnson</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 300</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 15</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 4 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">4. Sarah Johnson</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 250</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 12</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 5 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">5. Michael Brown</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 200</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 10</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 6 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">6. Alex Thompson</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 180</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 9</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 7 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">7. Emily Davis</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 160</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 8</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-                <!-- User 8 -->
-                <div
-                    style="display: inline-block; background-color: #f9f9f9; padding: 10px; border-radius: 10px; margin-right: 10px;">
-                    <div>
-                        <span style="font-size: 1.2rem; color: #333;">8. Olivia Wilson</span>
-                        <p style="font-size: 1rem; color: #777;">Points: 140</p>
-                        <p style="font-size: 0.9rem; color: #777;">Books Exchanged: 7</p>
-                    </div>
-                    <div style="background-color: #f1f1f1; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: #333;">Bronze Tier</span>
-                    </div>
-                </div>
-
-
+                <div id="leaders"></div>
             </div>
 
             <!-- Points Redeem System Section -->
@@ -307,14 +206,14 @@
                 <div style="margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem;">
                     <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Tiers and Benefits:</h3>
                     <p style="font-size: 1rem; color: #777;">The more points you accumulate, the higher your tier.
-                        Starting from Bronze (10 points), to Silver (20 points), and Gold (30 points), each tier comes
+                        Starting from Bronze (10 points), to Silver (50 points), and Gold (100 points), each tier comes
                         with its unique perks.</p>
                 </div>
 
                 <div style="margin-bottom: 2rem;">
                     <h3 style="font-size: 1.2rem; color: #333; margin-bottom: .5rem;">Redeeming Points:</h3>
                     <p style="font-size: 1rem; color: #777;">You can redeem your points for free books and vouchers.
-                        Every 100 points get you a free book, and every 50 books exchanged get you a voucher!</p>
+                        Every 100 points you get a free book, and every 50 points you get a voucher!</p>
                 </div>
             </div>
 

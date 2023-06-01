@@ -39,6 +39,10 @@ const UserSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  totalPoints: {
+    type: Number,
+    default: 0,
+  },
   bookWishList: [
     {
       type: mongoose.Schema.Types.ObjectId,
