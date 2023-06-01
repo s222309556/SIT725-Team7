@@ -187,10 +187,21 @@ function handleAccept() {
             }
           }
 
-          /////////////Point Calculation/////////////////////
+          /////////////Point Add/////////////////////
           // if req.status == "Completed" then calculate points
-          ////LOGIC////////
-          //Call the API to calculate points
+          if (req.status == "Completed") {
+            fetch(`/users/${sellerId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                redeemPoints: seller.redeemPoints + 5,
+                totalPoints: seller.totalPoints + 5,
+              }),
+            });
+          }
+          ///////////////////////////////////////////////////
 
           //reload page
           window.location.reload();

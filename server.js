@@ -71,6 +71,7 @@ app.post("/books/getBooksByIds", bookController.getBooksByIds);
 // Define routes for users
 app.get("/users", userController.getUsers);
 app.get("/users/:id", userController.getUserById);
+app.get("/topusers", userController.getTopUsers);
 app.post("/users", userController.createUser);
 app.put("/users/:id", userController.updateUser);
 app.delete("/users/:id", userController.deleteUser);

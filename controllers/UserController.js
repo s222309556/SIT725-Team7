@@ -13,6 +13,18 @@ exports.getUsers = async (req, res, next) => {
   }
 };
 
+// @desc    Get Top 10 users by totalPoints
+// @route   GET /users/top
+// @access  Public
+exports.getTopUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().sort({ totalPoints: -1 }).limit(10);
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 // @desc    Get user by id
 // @route   GET /users/:id
 // @access  Public
