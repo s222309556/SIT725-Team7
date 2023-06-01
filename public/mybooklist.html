@@ -85,7 +85,7 @@
     </tbody>
   </table>
 
-  <div class="edit-form-container">
+  <div class="edit-form-container" id="editFormWrapper">
     <h3>Edit Book</h3>
     <form id="editForm">
       <label for="editTitle">Title:</label>
@@ -106,48 +106,20 @@
   </div>
 
   <script>
-    // Sample book data 
-    const books = [
-      {
-        title: "Book 1",
-        author: "Author 1",
-        genre: "Fiction"
-      },
-      {
-        title: "Book 2",
-        author: "Author 2",
-        genre: "Non-Fiction"
-      },
-      {
-        title: "Book 3",
-        author: "Author 3",
-        genre: "Fantasy"
-      },
-      {
-        title: "Book 4",
-        author: "Author 4",
-        genre: "Fiction"
-      },
-      {
-        title: "Book 5",
-        author: "Author 5",
-        genre: "Non-Fiction"
-      }
-    ];
-
     // Function to generate HTML for each book row
     function generateBookRow(book) {
       const row = document.createElement('tr');
+      row.setAttribute('data-id', book._id);
       const titleCell = document.createElement('td');
-      titleCell.textContent = book.title;
+      titleCell.textContent = book.bookTitle;
       row.appendChild(titleCell);
 
       const authorCell = document.createElement('td');
-      authorCell.textContent = book.author;
+      authorCell.textContent = book.authorName;
       row.appendChild(authorCell);
 
       const genreCell = document.createElement('td');
-      genreCell.textContent = book.genre;
+      genreCell.textContent = book.bookGenre;
       row.appendChild(genreCell);
 
       const actionsCell = document.createElement('td');
@@ -163,6 +135,7 @@
 
       const updateButton = document.createElement('button');
       updateButton.textContent = 'Update';
+      updateButton.style.marginLeft = '5px';
       updateButton.addEventListener('click', () => {
         showEditForm(book);
       });
@@ -175,17 +148,43 @@
 
     // Function to display the books in the table
     function displayBooks() {
-      const tbody = document.querySelector('tbody');
-
-      books.forEach((book) => {
-        const row = generateBookRow(book);
-        tbody.appendChild(row);
-      });
+      //get books by userId
+      var books = [];
+      const userId = sessionStorage.getItem('userId');
+      console.log(userId);
+      fetch(`/books/user/${userId}`)
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+          books = res.data;
+          const tbody = document.querySelector('tbody');
+          books.forEach((book) => {
+            const row = generateBookRow(book);
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => console.log(error));
     }
 
     // Function to delete a book (replace with actual delete logic)
     function deleteBook(book) {
       console.log(`Deleting book: ${book.title}`);
+      //pop up message to confirm delete
+      var confirm = window.confirm(`Are you sure you want to delete ${book.bookTitle}?`);
+      if (confirm == true) {
+        console.log("You pressed OK!");
+        fetch(`/books/${book._id}`, {
+          method: 'DELETE'
+        })
+          .then((response) => response.json())
+          .then((res) => {
+            console.log(res);
+            window.location.reload();
+          })
+          .catch((error) => console.log(error));
+      } else {
+        console.log("You pressed Cancel!");
+      }
     }
 
     // Function to show the edit form and pre-fill with book details
@@ -195,37 +194,50 @@
       const editAuthorInput = document.getElementById('editAuthor');
       const editGenreSelect = document.getElementById('editGenre');
 
-      editTitleInput.value = book.title;
-      editAuthorInput.value = book.author;
-      editGenreSelect.value = book.genre;
+      editTitleInput.value = book.bookTitle;
+      editAuthorInput.value = book.authorName;
+      editGenreSelect.value = book.bookGenre;
 
       editForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         // Update book details with the form values (replace with actual update logic)
-        book.title = editTitleInput.value;
-        book.author = editAuthorInput.value;
-        book.genre = editGenreSelect.value;
+        let updatedBook = {
+          _id: book._id,
+          bookTitle: editTitleInput.value,
+          authorName: editAuthorInput.value,
+          bookGenre: editGenreSelect.value
+        }
+
+        fetch(`/books/${book._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedBook),
+        })
+          .then((response) => response.json())
+          .then((res) => {
+            console.log(res);
+            // Update the book row in the table
+            const row = generateBookRow(updatedBook);
+            const oldRow = document.querySelector(`tr[data-id="${book._id}"]`);
+            oldRow.replaceWith(row);
+          })
+          .catch((error) => console.log(error));
 
         // Hide the edit form
         hideEditForm();
       });
-
-      showElement('edit-form-container');
+      // get element by className
+      document.getElementById('editFormWrapper').style.display = 'block';
     }
 
     // Function to hide the edit form
     function hideEditForm() {
-      const editFormContainer = document.querySelector('.edit-form-container');
+      const editFormContainer = document.getElementById('editFormWrapper');
       editFormContainer.style.display = 'none';
     }
-
-    // Function to show an element by ID
-    function showElement(elementId) {
-      const element = document.getElementById(elementId);
-      element.style.display = 'block';
-    }
-
     // Display the books on page load
     displayBooks();
   </script>

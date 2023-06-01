@@ -39,6 +39,12 @@ const UserSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  bookWishList: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book",
+    },
+  ],
 });
 
 // Middleware to populate the userName field before saving

@@ -1,6 +1,10 @@
+var userId;
+var whishListBookIds = [];
+var allbooks = [];
 document.addEventListener("DOMContentLoaded", function () {
   // Fetch and display the list of books
   checkSession();
+  getWishList();
   fetchBooks();
   handleSearch();
 });
@@ -23,9 +27,9 @@ async function fetchBooks() {
     const data = await response.json();
 
     if (data.success) {
-      const books = data.data;
+      allbooks = data.data;
       //call showBooks function
-      populateBooks(books);
+      populateBooks(allbooks);
       // // Generate the book list HTML
       // const bookListHTML = books
       //   .map((book) => {
@@ -55,12 +59,12 @@ function populateBooks(books) {
     const bookContainer = document.createElement("div");
     bookContainer.setAttribute("name", "bookElement");
     bookContainer.style.cssText =
-      "float: left; width: 300px; height: 400px; background-color: #f0f0f0; border-radius: 10px; margin: 20px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); cursor: pointer;";
+      "float: left; width: 300px; height: 400px; background-color: #f0f0f0; border-radius: 10px; margin: 20px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3)";
 
     // Create the book cover element
     const bookCover = document.createElement("div");
     bookCover.style.cssText =
-      "width: 100%; height: 200px; background-color: #ddd; border-radius: 5px; margin-bottom: 10px; background-image: url('images/noBook.jpg'); background-position-x: center; background-position-y: center; background-size: cover;";
+      "width: 100%; height: 200px; background-color: #ddd; border-radius: 5px; margin-bottom: 10px; background-image: url('images/noBook.jpg'); background-position-x: center; background-position-y: center; background-size: cover; cursor: pointer;";
     bookContainer.appendChild(bookCover);
 
     // Create the book information section
@@ -68,6 +72,8 @@ function populateBooks(books) {
     const titleElement = document.createElement("h2");
     const authorElement = document.createElement("p");
     const ownerElement = document.createElement("p");
+    const buttonElement = document.createElement("button");
+    buttonElement.setAttribute("buttonData-id", book._id);
 
     titleElement.innerText = book.bookTitle;
     titleElement.style.cssText =
@@ -80,13 +86,33 @@ function populateBooks(books) {
     ownerElement.innerText = "Owned by " + book.userName;
     ownerElement.style.cssText = "font-size: 0.9rem; color: #777;";
 
+    //check if book is in wish list
+    if (whishListBookIds.includes(book._id)) {
+      buttonElement.innerText = "Remove from Wish List";
+      buttonElement.style.cssText =
+        "width: 100%; padding: 10px; border: none; border-radius: 5px; background-color: rgb(225 225 225); color: #333; font-size: 1rem; font-weight: bold; cursor: pointer;";
+      buttonElement.addEventListener("click", function () {
+        // Remove book from wish list
+        removeFromWishList(book._id);
+      });
+    } else {
+      buttonElement.innerText = "Add to Wish List";
+      buttonElement.style.cssText =
+        "width: 100%; padding: 10px; border: none; border-radius: 5px; background-color: rgb(225 225 225); color: #333; font-size: 1rem; font-weight: bold; cursor: pointer;";
+      buttonElement.addEventListener("click", function () {
+        // Add book to wish list
+        addToWishList(book._id);
+      });
+    }
+
     bookInfo.appendChild(titleElement);
     bookInfo.appendChild(authorElement);
     bookInfo.appendChild(ownerElement);
+    bookInfo.appendChild(buttonElement);
     bookContainer.appendChild(bookInfo);
 
     //add click event listener to bookContainer
-    bookContainer.addEventListener("click", function () {
+    bookCover.addEventListener("click", function () {
       // Redirect to the book details page
       window.location.href = `/bookDetails.html?id=${book._id}`;
     });
@@ -159,4 +185,123 @@ async function searchBooks(reqBody) {
   } catch (error) {
     console.error(error.message);
   }
+}
+
+function addToWishList(bookId) {
+  fetch(`/users/${userId}/addBook/${bookId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.success) {
+        alert("Book added to wish list");
+        document.querySelector(
+          'button[buttonData-id="' + bookId + '"]'
+        ).innerText = "Remove from Wish List";
+        getWishList();
+      } else {
+        console.error(res.message);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function removeFromWishList(bookId) {
+  fetch(`/users/${userId}/removeBook/${bookId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.success) {
+        alert("Book removed from wish list");
+        document.querySelector(
+          'button[buttonData-id="' + bookId + '"]'
+        ).innerText = "Add to Wish List";
+        getWishList();
+        getWishList();
+      } else {
+        console.error(res.message);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function getWishList() {
+  fetch(`/users/${userId}`)
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.success) {
+        whishListBookIds = res.data.bookWishList;
+
+        fetch(`/books/getBooksByIds`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ bookIds: whishListBookIds }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            if (res.success) {
+              clearWishList();
+              populateWishList(res.data);
+            } else {
+              console.error(res.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        console.error(res.message);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function clearWishList() {
+  const wishListBookContainer = document.getElementById("wishlistContainer");
+  wishListBookContainer.innerHTML = "";
+}
+
+function populateWishList(data) {
+  const wishListBookContainer = document.getElementById("wishlistContainer");
+  data.forEach((book) => {
+    const bookContainer = document.createElement("div");
+    bookContainer.style.cssText =
+      "background-color: #f0f0f0; padding: 20px; margin-right: 20px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);";
+    const bookTitle = document.createElement("h2");
+    bookTitle.innerText = book.bookTitle;
+    bookTitle.style.cssText =
+      "font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;";
+    const bookAuthor = document.createElement("p");
+    bookAuthor.innerText = book.authorName;
+    bookAuthor.style.cssText =
+      "font-size: 1rem; color: #777; margin-bottom: 10px;";
+    const bookOwner = document.createElement("p");
+    bookOwner.innerText = "Owned by " + book.userName;
+    bookOwner.style.cssText = "font-size: 0.9rem; color: #777;";
+
+    //append
+    bookContainer.appendChild(bookTitle);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookOwner);
+    wishListBookContainer.appendChild(bookContainer);
+  });
 }
