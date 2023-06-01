@@ -36,7 +36,7 @@
         <!-- header -->
         <header id="header" class="position-relative">
             <!-- headerHolderCol -->
-            <div class="headerHolderCol pt-lg-4 pb-lg-5 py-3">
+            <div class="headerHolderCol pt-lg-4 pb-lg-5 py-3" style="display: none;">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-sm-4">
@@ -72,13 +72,20 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
+
                                 <div class="nav-item" id="navbarNav">
                                     <ul class="navbar-nav mx-auto text-uppercase d-inline-block">
                                         <li class="nav-item">
                                             <a class="d-block" href="search.html">Home</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="d-block" href="addBook.html">Add Book</a>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">My Books</a>
+                                            <ul
+                                                class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
+                                                <li class="d-block mx-0"><a href="addBook.html">Add Book</a></li>
+                                                <li class="d-block mx-0"><a href="mybooklist.html">My Book List</a></li>
+                                            </ul>
                                         </li>
                                         <li class="nav-item">
                                             <a class="d-block" href="myOrders.html">My Orders</a>
@@ -90,7 +97,7 @@
                                             <a class="d-block" href="contact-us.html">contact</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="d-block" href="about-us.html">About</a>
+                                            <a class="d-block" href="aboutUs.html">About</a>
                                         </li>
 
                                     </ul>
@@ -164,6 +171,15 @@
 
                         </div>
                     </div>
+
+                    <!-- Book List -->
+                    <div style="margin-top: 60px; text-align: center;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Wishlist</h3>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                            <div id="wishlistContainer"></div>
+                        </div>
+                    </div>
+
                     <div
                         style="width: 80%; margin: 2rem auto; background-color: #fff; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
                         <h2
@@ -198,13 +214,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Book List -->
-                    <div style="margin-top: 60px; text-align: center;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Wishlist</h3>
-                        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                            <div id="wishlistContainer"></div>
-                        </div>
-                    </div>
+
                 </div>
                 <div
                     style="width: 100%; background-color: #ffffff; padding: 20px;display: flex; justify-content: space-between; align-items: stretch; height: auto;">

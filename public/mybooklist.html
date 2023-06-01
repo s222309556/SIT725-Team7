@@ -2,246 +2,367 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Books</title>
-  <style>
-    body {
-      font-family: BlinkMacSystemFont, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
+  <html lang="en">
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+  <head>
+    <!-- set the encoding of your site -->
+    <meta charset="utf-8">
+    <!-- set the Compatible of your site -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- set the page title -->
+    <title>My Rating</title>
+    <!-- include the site Google Fonts stylesheet -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap"
+      rel="stylesheet">
+    <!-- include the site bootstrap stylesheet -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- include the site fontawesome stylesheet -->
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- include theme plugins setting stylesheet -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <!-- include theme color setting stylesheet -->
+    <link rel="stylesheet" href="css/color.css">
+    <!-- include theme responsive setting stylesheet -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!--
+    <link rel="stylesheet" href="css/ratings.css">-->
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-    }
+    <style>
+      body {
+        font-family: BlinkMacSystemFont, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
 
-    th,
-    td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #ccc;
-    }
+      h1 {
+        font-family: 'Playfair Display', serif;
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-    th {
-      font-weight: bold;
-    }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+      }
 
-    .button-container {
-      text-align: right;
-    }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
 
-    .button-container button {
-      background-color: #5ba515;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-    }
+      th {
+        font-weight: bold;
+      }
 
-    .button-container button:hover {
-      background-color: #4c910d;
-    }
+      .button-container {
+        text-align: right;
+      }
 
-    .edit-form-container {
-      display: none;
-      margin-top: 10px;
-    }
+      .button-container button {
+        background-color: #5ba515;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+      }
 
-    .edit-form-container input[type="text"],
-    .edit-form-container select {
-      width: 100%;
-      padding: 5px;
-      margin-bottom: 5px;
-    }
-  </style>
-</head>
+      .button-container button:hover {
+        background-color: #4c910d;
+      }
+
+      .edit-form-container {
+        display: none;
+        margin-top: 10px;
+      }
+
+      .edit-form-container input[type="text"],
+      .edit-form-container select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
 
 <body>
+  <div id="pageWrapper">
+    <!-- header -->
+    <header id="header" class="position-relative">
+      <!-- headerHolderCol -->
+      <div class="headerHolderCol pt-lg-4 pb-lg-5 py-3" style="display: none;">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <a href="javascript:void(0);" class="tel d-flex align-items-end"><i class="icon-call mr-2"></i> Hotline:
+                (602) 462 8889</a>
+            </div>
+            <div class="col-12 col-sm-4 text-center">
+              <span class="txt d-block">Wellcome To BookSwap</span>
+            </div>
+            <div class="col-12 col-sm-4">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- headerHolder -->
+      <div class="headerHolder container pt-lg-5 pb-lg-7 py-4">
+        <div class="row">
+          <div class="col-6 col-sm-2">
+            <!-- mainLogo -->
+            <div class="logo">
+              <a href="search.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
+            </div>
+          </div>
+          <div class="col-6 col-sm-7 col-lg-8 static-block">
+            <!-- mainHolder -->
+            <div class="mainHolder pt-lg-5 pt-3 justify-content-center">
+              <!-- pageNav2 -->
+              <nav class="navbar navbar-expand-lg navbar-light p-0 pageNav2 position-static">
+                <button type="button" class="navbar-toggle collapsed position-relative" data-toggle="collapse"
+                  data-target="#navbarNav" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <div class="nav-item" id="navbarNav">
+                  <ul class="navbar-nav mx-auto text-uppercase d-inline-block">
+                    <li class="nav-item">
+                      <a class="d-block" href="search.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">My Books</a>
+                      <ul
+                        class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
+                        <li class="d-block mx-0"><a href="addBook.html">Add Book</a></li>
+                        <li class="d-block mx-0"><a href="mybooklist.html">My Book List</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="myOrders.html">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="myPoints.html">My Points</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="contact-us.html">contact</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="d-block" href="aboutUs.html">About</a>
+                    </li>
 
-  <h1>My Books</h1>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div class="col-sm-3 col-lg-2">
+            <!-- wishListII -->
+            <ul class="nav nav-tabs wishListII pt-5 justify-content-end border-bottom-0">
+              <li class="nav-item ml-0"><a class="nav-link icon-search" href="search.html"></a></li>
+              <li class="nav-item"><a class="nav-link icon-profile" href="logout.html"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Genre</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Book data rows will be dynamically added here -->
-    </tbody>
-  </table>
+    <h1>My Books</h1>
 
-  <div class="edit-form-container" id="editFormWrapper">
-    <h3>Edit Book</h3>
-    <form id="editForm">
-      <label for="editTitle">Title:</label>
-      <input type="text" id="editTitle" name="editTitle" required>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Book data rows will be dynamically added here -->
+      </tbody>
+    </table>
 
-      <label for="editAuthor">Author:</label>
-      <input type="text" id="editAuthor" name="editAuthor" required>
+    <div class="edit-form-container" id="editFormWrapper">
+      <h3>Edit Book</h3>
+      <form id="editForm">
+        <label for="editTitle">Title:</label>
+        <input type="text" id="editTitle" name="editTitle" required>
 
-      <label for="editGenre">Genre:</label>
-      <select id="editGenre" name="editGenre" required>
-        <option value="fiction">Fiction</option>
-        <option value="non-fiction">Non-Fiction</option>
-        <option value="fantasy">Fantasy</option>
-      </select>
+        <label for="editAuthor">Author:</label>
+        <input type="text" id="editAuthor" name="editAuthor" required>
 
-      <button type="submit">Save Changes</button>
-    </form>
-  </div>
+        <label for="editGenre">Genre:</label>
+        <select id="editGenre" name="editGenre" required>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-Fiction</option>
+          <option value="fantasy">Fantasy</option>
+        </select>
 
-  <script>
-    // Function to generate HTML for each book row
-    function generateBookRow(book) {
-      const row = document.createElement('tr');
-      row.setAttribute('data-id', book._id);
-      const titleCell = document.createElement('td');
-      titleCell.textContent = book.bookTitle;
-      row.appendChild(titleCell);
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
 
-      const authorCell = document.createElement('td');
-      authorCell.textContent = book.authorName;
-      row.appendChild(authorCell);
+    <script>
+      // Function to generate HTML for each book row
+      function generateBookRow(book) {
+        const row = document.createElement('tr');
+        row.setAttribute('data-id', book._id);
+        const titleCell = document.createElement('td');
+        titleCell.textContent = book.bookTitle;
+        row.appendChild(titleCell);
 
-      const genreCell = document.createElement('td');
-      genreCell.textContent = book.bookGenre;
-      row.appendChild(genreCell);
+        const authorCell = document.createElement('td');
+        authorCell.textContent = book.authorName;
+        row.appendChild(authorCell);
 
-      const actionsCell = document.createElement('td');
-      const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Delete';
-      deleteButton.addEventListener('click', () => {
-        // Function to delete the book from the database
-        deleteBook(book);
-        // Remove the row from the table
-        row.remove();
-      });
-      actionsCell.appendChild(deleteButton);
+        const genreCell = document.createElement('td');
+        genreCell.textContent = book.bookGenre;
+        row.appendChild(genreCell);
 
-      const updateButton = document.createElement('button');
-      updateButton.textContent = 'Update';
-      updateButton.style.marginLeft = '5px';
-      updateButton.addEventListener('click', () => {
-        showEditForm(book);
-      });
-      actionsCell.appendChild(updateButton);
+        const actionsCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => {
+          // Function to delete the book from the database
+          deleteBook(book);
+          // Remove the row from the table
+          row.remove();
+        });
+        actionsCell.appendChild(deleteButton);
 
-      row.appendChild(actionsCell);
+        const updateButton = document.createElement('button');
+        updateButton.textContent = 'Update';
+        updateButton.style.marginLeft = '5px';
+        updateButton.addEventListener('click', () => {
+          showEditForm(book);
+        });
+        actionsCell.appendChild(updateButton);
 
-      return row;
-    }
+        row.appendChild(actionsCell);
 
-    // Function to display the books in the table
-    function displayBooks() {
-      //get books by userId
-      var books = [];
-      const userId = sessionStorage.getItem('userId');
-      console.log(userId);
-      fetch(`/books/user/${userId}`)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-          books = res.data;
-          const tbody = document.querySelector('tbody');
-          books.forEach((book) => {
-            const row = generateBookRow(book);
-            tbody.appendChild(row);
-          });
-        })
-        .catch((error) => console.log(error));
-    }
-
-    // Function to delete a book (replace with actual delete logic)
-    function deleteBook(book) {
-      console.log(`Deleting book: ${book.title}`);
-      //pop up message to confirm delete
-      var confirm = window.confirm(`Are you sure you want to delete ${book.bookTitle}?`);
-      if (confirm == true) {
-        console.log("You pressed OK!");
-        fetch(`/books/${book._id}`, {
-          method: 'DELETE'
-        })
-          .then((response) => response.json())
-          .then((res) => {
-            console.log(res);
-            window.location.reload();
-          })
-          .catch((error) => console.log(error));
-      } else {
-        console.log("You pressed Cancel!");
+        return row;
       }
-    }
 
-    // Function to show the edit form and pre-fill with book details
-    function showEditForm(book) {
-      const editForm = document.getElementById('editForm');
-      const editTitleInput = document.getElementById('editTitle');
-      const editAuthorInput = document.getElementById('editAuthor');
-      const editGenreSelect = document.getElementById('editGenre');
-
-      editTitleInput.value = book.bookTitle;
-      editAuthorInput.value = book.authorName;
-      editGenreSelect.value = book.bookGenre;
-
-      editForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        // Update book details with the form values (replace with actual update logic)
-        let updatedBook = {
-          _id: book._id,
-          bookTitle: editTitleInput.value,
-          authorName: editAuthorInput.value,
-          bookGenre: editGenreSelect.value
-        }
-
-        fetch(`/books/${book._id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updatedBook),
-        })
+      // Function to display the books in the table
+      function displayBooks() {
+        //get books by userId
+        var books = [];
+        const userId = sessionStorage.getItem('userId');
+        console.log(userId);
+        fetch(`/books/user/${userId}`)
           .then((response) => response.json())
           .then((res) => {
             console.log(res);
-            // Update the book row in the table
-            const row = generateBookRow(updatedBook);
-            const oldRow = document.querySelector(`tr[data-id="${book._id}"]`);
-            oldRow.replaceWith(row);
+            books = res.data;
+            const tbody = document.querySelector('tbody');
+            books.forEach((book) => {
+              const row = generateBookRow(book);
+              tbody.appendChild(row);
+            });
           })
           .catch((error) => console.log(error));
+      }
 
-        // Hide the edit form
-        hideEditForm();
-      });
-      // get element by className
-      document.getElementById('editFormWrapper').style.display = 'block';
-    }
+      // Function to delete a book (replace with actual delete logic)
+      function deleteBook(book) {
+        console.log(`Deleting book: ${book.title}`);
+        //pop up message to confirm delete
+        var confirm = window.confirm(`Are you sure you want to delete ${book.bookTitle}?`);
+        if (confirm == true) {
+          console.log("You pressed OK!");
+          fetch(`/books/${book._id}`, {
+            method: 'DELETE'
+          })
+            .then((response) => response.json())
+            .then((res) => {
+              console.log(res);
+              window.location.reload();
+            })
+            .catch((error) => console.log(error));
+        } else {
+          console.log("You pressed Cancel!");
+        }
+      }
 
-    // Function to hide the edit form
-    function hideEditForm() {
-      const editFormContainer = document.getElementById('editFormWrapper');
-      editFormContainer.style.display = 'none';
-    }
-    // Display the books on page load
-    displayBooks();
-  </script>
+      // Function to show the edit form and pre-fill with book details
+      function showEditForm(book) {
+        const editForm = document.getElementById('editForm');
+        const editTitleInput = document.getElementById('editTitle');
+        const editAuthorInput = document.getElementById('editAuthor');
+        const editGenreSelect = document.getElementById('editGenre');
+
+        editTitleInput.value = book.bookTitle;
+        editAuthorInput.value = book.authorName;
+        editGenreSelect.value = book.bookGenre;
+
+        editForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          // Update book details with the form values (replace with actual update logic)
+          let updatedBook = {
+            _id: book._id,
+            bookTitle: editTitleInput.value,
+            authorName: editAuthorInput.value,
+            bookGenre: editGenreSelect.value
+          }
+
+          fetch(`/books/${book._id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedBook),
+          })
+            .then((response) => response.json())
+            .then((res) => {
+              console.log(res);
+              // Update the book row in the table
+              const row = generateBookRow(updatedBook);
+              const oldRow = document.querySelector(`tr[data-id="${book._id}"]`);
+              oldRow.replaceWith(row);
+            })
+            .catch((error) => console.log(error));
+
+          // Hide the edit form
+          hideEditForm();
+        });
+        // get element by className
+        document.getElementById('editFormWrapper').style.display = 'block';
+      }
+
+      // Function to hide the edit form
+      function hideEditForm() {
+        const editFormContainer = document.getElementById('editFormWrapper');
+        editFormContainer.style.display = 'none';
+      }
+      // Display the books on page load
+      displayBooks();
+    </script>
+  </div>
+  <!-- footer -->
+  <footer id="footer" class="overflow-hidden bg-dark" style="margin-top:480px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
+          <p class="mb-0">Coppyright 2023 by <a href="javascript:void(0);">Book Share</a> - All right
+            reserved</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 
 </html>

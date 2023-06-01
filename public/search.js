@@ -284,8 +284,12 @@ function populateWishList(data) {
   const wishListBookContainer = document.getElementById("wishlistContainer");
   data.forEach((book) => {
     const bookContainer = document.createElement("div");
+    bookContainer.addEventListener("click", function () {
+      // Redirect to the book details page
+      window.location.href = `/bookDetails.html?id=${book._id}`;
+    });
     bookContainer.style.cssText =
-      "background-color: #f0f0f0; padding: 20px; margin-right: 20px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);";
+      "cursor:pointer;background-color: #f0f0f0; padding: 20px; margin-right: 20px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);";
     const bookTitle = document.createElement("h2");
     bookTitle.innerText = book.bookTitle;
     bookTitle.style.cssText =
